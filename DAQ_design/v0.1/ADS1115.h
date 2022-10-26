@@ -4,17 +4,7 @@
 
 /*
  * @file ADS1115.h
- *
- *@author Written by Mohammed Asim Merchant
- *		 Created on 14/03/2019
- *
- *@Note	PIN CONFIGURATION
- *		ADS1115 SCL				---		I2C_SCL = PINB2
- *		ADS1115 SDA				---		I2C_SDA = PINB3
- *		ADS1115 ADDR			---		GND
- *		ADS1115 ALERT/DDRY		---		any I/O = PIND3
- *
- * @License MIT License
+ * Modified by Borke Birgin 26/10/2022
  *
  * Copyright (c) 2019 Mohammed Asim Merchant
  * 
