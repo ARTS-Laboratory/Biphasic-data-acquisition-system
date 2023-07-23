@@ -29,8 +29,12 @@ This work is licensed under a
 
 Cite as:
 
-@Misc{Downey2023BiphasicDataAcquisition,   
-  author       = {Austin Downey, Hasan Borke Birgin, David Wamai, and Joud Satme},   
+David Wamai, Hasan Borke Birgin, Austin Downey, and Joud Satme. Biphasic data acquisition system. GitHub, July 2023. URL: https://github.com/ARTS-Laboratory/Biphasic-data-acquisition-system
+ 
+in bibtex
+
+@Misc{Wamai2023BiphasicDataAcquisition,   
+  author       = {David Wamai and Hasan Borke Birgin and Austin Downey and Joud Satme},   
   howpublished = {GitHub},  
   month        = jul,   
   title        = {Biphasic Data Acquisition System},   
