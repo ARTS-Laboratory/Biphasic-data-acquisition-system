@@ -2,6 +2,6 @@
 *.bak
 *.bbl
 *.aux
-/DAQ_design/v0.2.1/*.kicad_pcb-bak
-/DAQ_design/v0.2.1/*.sch-bak
-/DAQ_design/v0.2.1/v0.2.1-backups
+./DAQ_design/v0.2.1/*.kicad_pcb-bak
+./DAQ_design/v0.2.1/*.sch-bak
+./DAQ_design/v0.2.1/*-backups
