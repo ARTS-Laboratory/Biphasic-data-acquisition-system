@@ -1,5 +1,5 @@
 # Biphasic-data-acquisition-system
-Data acquisition system for the biphasic measurement of multifunctional materials. The measurement method is described in by Downe et al [1], while the initial layout of the hardware was developed by Hasan Borke Birgin at the University of Perugia. Figure 1 shows an overview of the bi-phasic measurement approach. 
+Data acquisition system for the biphasic measurement of multifunctional materials. The measurement method is described in by Downey et al [1], while the initial layout of the hardware was developed by Hasan Borke Birgin at the University of Perugia. Figure 1 shows an overview of the bi-phasic measurement approach. 
 
 <p align="center">
 <img src="media/figure.png" alt="drawing" width="700"/>
