@@ -2,3 +2,5 @@
 *.bak
 *.bbl
 *.aux
+*.kicad_pcb-bak
+*.sch-bak
