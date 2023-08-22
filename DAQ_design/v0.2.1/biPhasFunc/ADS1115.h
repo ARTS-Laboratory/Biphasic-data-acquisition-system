@@ -1,6 +1,6 @@
 #ifndef ADS1115_H_DEVCUBE
 #define ADS1115_H_DEVCUBE
-#include <I2CLib.h>
+#include "I2CLib.h"
 
 /*
  * @file ADS1115.h

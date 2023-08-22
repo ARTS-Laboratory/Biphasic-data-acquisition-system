@@ -1,9 +1,9 @@
-#define F_CPU 16000000UL
+//#define F_CPU 16000000UL
 #include <avr/io.h> // This contains the definitions of the terms used
 #include <util/delay.h> // This contains the definition of delay function
-#include <ADS1115.h>
+#include "ADS1115.h"
 #include <avr/interrupt.h> // This contains the definitions of the terms used
-#include <UART.h>
+#include "UART.h"
 
 
 int16_t val;
@@ -51,4 +51,3 @@ _delay_ms(63); // datarate, timings and delays could be revisited, system is set
 }
 
 }
-
