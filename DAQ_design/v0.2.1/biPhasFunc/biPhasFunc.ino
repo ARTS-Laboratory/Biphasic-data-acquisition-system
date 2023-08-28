@@ -1,10 +1,10 @@
-#include "ADS1115.h" 
+//#include "ADS1115.h" 
 //#include "UART.h"
 //#include <Adafruit_ADS1015.h>
-#include <Adafruit_ADS1X15.h>
+//#include <Adafruit_ADS1X15.h>
 #include <Wire.h>
 
-Adafruit_ADS1115 ads;
+//Adafruit_ADS1115 ads;
 
 #define LOGIC1 9     
 #define LOGIC2 8     
@@ -12,7 +12,7 @@ Adafruit_ADS1115 ads;
 void setup() {
   Serial.begin(9600);
 
-  Serial.print("Setup Begin");
+  Serial.println("Setup Begin");
 
   // Set pin modes
   pinMode(LOGIC1, OUTPUT);  // Set pin B0 as output
@@ -22,8 +22,8 @@ void setup() {
   digitalWrite(LOGIC1, LOW);
   digitalWrite(LOGIC2, LOW);
 
-  Serial.print("Setup Done. \n");
-  ads.begin();
+  Serial.println("Setup Done. \n");
+//  ads.begin();
 }
 
 void loop() {
@@ -34,14 +34,14 @@ void loop() {
   digitalWrite(LOGIC2, LOW);
   digitalWrite(LOGIC1, HIGH);
   delay(500);
-  Serial.print("L1 High. \n");
+  Serial.println("L1 High. \n");
 
 
   // Switch to second polarity
   digitalWrite(LOGIC1, LOW);
   digitalWrite(LOGIC2, HIGH);
   delay(400);
-  Serial.print("L2 High. \n");
+  Serial.println("L2 High. \n");
 
 
 //  // Read ADC values
