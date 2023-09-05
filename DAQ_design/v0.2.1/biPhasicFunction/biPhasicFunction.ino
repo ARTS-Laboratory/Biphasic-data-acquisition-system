@@ -24,35 +24,46 @@ void setup() {
     Serial.println("Failed to initialize ADS1115");
     while(1);
   }
+  ADS.setGain(0);
 
   Serial.println("setup done");
 }
 
 void loop() {
-  ADS.setGain(0);
   
   // Switch to first polarity
-  digitalWrite(LOGIC2, LOW);
-  digitalWrite(LOGIC1, HIGH);
-  delay(500);
-  Serial.println("L1 High. \n");
-
-  // Switch to second polarity
   digitalWrite(LOGIC1, LOW);
   digitalWrite(LOGIC2, HIGH);
-  delay(400);
+  Serial.println("L1 High. \n");
+  delay(500);
+
+  // Switch to second polarity
+  digitalWrite(LOGIC2, LOW);
+  digitalWrite(LOGIC1, HIGH);
   Serial.println("L2 High. \n");
+  delay(400);
+  
+  int16_t val_drop = ADS.readADC_Differential_2_3();  
+  int16_t val_sense = ADS.readADC_Differential_0_1();
+  
+  float r = bigR(val_drop, val_sense);
+  float volts_drop = ADS.toVoltage(val_drop); 
+  float volts_sense = ADS.toVoltage(val_sense); 
 
-  int16_t val_0 = ADS.readADC(0);  
-  int16_t val_1 = ADS.readADC(1);  
-  int16_t val_2 = ADS.readADC(2);  
-  int16_t val_3 = ADS.readADC(3);  
 
-  float f = ADS.toVoltage(2);  // voltage factor
+  Serial.print("\tvDROP: "); Serial.print(val_drop); Serial.print("\t"); Serial.println(volts_drop, 3);
+  Serial.print("\tvSENSE: "); Serial.print(val_sense); Serial.print("\t"); Serial.println(volts_sense, 3);
+  Serial.print("\tStructure Resistance: "); Serial.print(r);
 
-  Serial.print("\tAnalog0: "); Serial.print(val_0); Serial.print('\t'); Serial.println(val_0 * f, 3);
-  Serial.print("\tAnalog1: "); Serial.print(val_1); Serial.print('\t'); Serial.println(val_1 * f, 3);
-  Serial.print("\tAnalog2: "); Serial.print(val_2); Serial.print('\t'); Serial.println(val_2 * f, 3);
-  Serial.print("\tAnalog3: "); Serial.print(val_3); Serial.print('\t'); Serial.println(val_3 * f, 3);
   Serial.println();
+
+  delay(63);
+}
+
+int16_t bigR(int16_t drop, int16_t sense){
+
+  int16_t i_calculated = drop/15000;
+  int16_t R = sense/i_calculated;
+
+  return R;
 }
