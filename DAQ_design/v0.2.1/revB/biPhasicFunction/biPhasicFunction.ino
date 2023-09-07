@@ -32,14 +32,14 @@ void setup() {
 void loop() {
   
   // Switch to first polarity
-  digitalWrite(LOGIC1, LOW);
-  digitalWrite(LOGIC2, HIGH);
+  digitalWrite(LOGIC2, LOW);
+  digitalWrite(LOGIC1, HIGH);
   Serial.println("L1 High. \n");
   delay(500);
 
   // Switch to second polarity
-  digitalWrite(LOGIC2, LOW);
-  digitalWrite(LOGIC1, HIGH);
+  digitalWrite(LOGIC1, LOW);
+  digitalWrite(LOGIC2, HIGH);
   Serial.println("L2 High. \n");
   delay(400);
   
@@ -53,7 +53,7 @@ void loop() {
 
   Serial.print("\tvDROP: "); Serial.print(val_drop); Serial.print("\t"); Serial.println(volts_drop, 3);
   Serial.print("\tvSENSE: "); Serial.print(val_sense); Serial.print("\t"); Serial.println(volts_sense, 3);
-  Serial.print("\tStructure Resistance: "); Serial.print(r);
+  Serial.print("\tStructure Resistance: "); Serial.print(r); Serial.print(" ohms");
 
   Serial.println();
 
@@ -62,8 +62,8 @@ void loop() {
 
 int16_t bigR(int16_t drop, int16_t sense){
 
-  int16_t i_calculated = drop/15000;
-  int16_t R = sense/i_calculated;
+  float i_calculated = drop/15000;
+  float R = sense/i_calculated;
 
   return R;
 }
