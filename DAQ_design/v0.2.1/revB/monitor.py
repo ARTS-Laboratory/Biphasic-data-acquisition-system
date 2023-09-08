@@ -4,7 +4,7 @@ from time import sleep
 
 # Set up the serial connection.
 # Replace 'COM3' with your Arduino's COM port and adjust the baud rate if necessary.
-ser = serial.Serial('/dev/ttyS0', 9600)
+ser = serial.Serial('COM6', 9600)
 ser.flush()
 
 # Lists to hold the data.
