@@ -59,10 +59,10 @@ void loop() {
   float r = bigR(volts_drop, volts_sense);
 
   unsigned long elapsedTime = millis() - startTime;
-  Serial.print(elapsedTime); Serial.print(",");
-  Serial.print(val_drop); Serial.print(","); Serial.print(volts_drop, 5);Serial.print(",");
-  Serial.print(val_sense); Serial.print(","); Serial.print(volts_sense, 5);Serial.print(",");
-  Serial.println(r,5); 
+  Serial.print(elapsedTime); Serial.print("\t");
+  Serial.print(val_drop); Serial.print("\t"); Serial.print(volts_drop, 7);Serial.print("\t");
+  Serial.print(val_sense); Serial.print("\t"); Serial.print(volts_sense, 7);Serial.print("\t");
+  Serial.println(r,7); 
 
   delay(63);
 }
