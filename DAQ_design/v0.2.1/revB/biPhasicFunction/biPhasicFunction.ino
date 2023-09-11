@@ -7,6 +7,7 @@
 //Adafruit_ADS1115 ads; 
 ADS1115 ADS(0x48);
 
+unsigned long startTime = 0;
 
 void setup() {
   Serial.begin(9600);
@@ -32,9 +33,12 @@ void setup() {
   // Serial.println("Structure Resistance (ohms)");
 }
 
-
 void loop() {
   
+  if(startTime == 0) { // Check if start time hasn't been initialized
+    startTime = millis(); // Record the time when LOGIC1 goes high for the first time
+  }
+
   // Switch to first polarity
   digitalWrite(LOGIC2, LOW);
   digitalWrite(LOGIC1, HIGH);
@@ -54,13 +58,15 @@ void loop() {
   float volts_sense = ADS.toVoltage(val_sense); 
   float r = bigR(volts_drop, volts_sense);
 
-
+  unsigned long elapsedTime = millis() - startTime;
+  Serial.print(elapsedTime); Serial.print(",");
   Serial.print(val_drop); Serial.print(","); Serial.print(volts_drop, 5);Serial.print(",");
   Serial.print(val_sense); Serial.print(","); Serial.print(volts_sense, 5);Serial.print(",");
   Serial.println(r,5); 
 
   delay(63);
 }
+
 
 float bigR(float drop, float sense){
 
