@@ -1,11 +1,12 @@
 #include <Wire.h>
 #include "ADS1X15.h"
+#include <Adafruit_ADS1X15.h>
 
 #define LOGIC1 9
 #define LOGIC2 8
 
-//Adafruit_ADS1115 ads; 
-ADS1115 ADS(0x48);
+Adafruit_ADS1115 ads; 
+// ADS1115 ADS(0x48);
 
 unsigned long startTime = 0;
 
@@ -20,11 +21,11 @@ void setup() {
   digitalWrite(LOGIC1, LOW);
   digitalWrite(LOGIC2, LOW);
 
-  if(!ADS.begin()){
+  if(!ads.begin()){
     Serial.println("Failed to initialize ADS1115");
     while(1);
   }
-  ADS.setGain(0);
+  ads.setGain(0);
 
   // Serial.println("setup done");
 
@@ -51,11 +52,11 @@ void loop() {
   // Serial.print("L2 High,");
   delay(400);
   
-  int16_t val_drop = ADS.readADC_Differential_2_3();  
-  int16_t val_sense = ADS.readADC_Differential_0_1();
+  int16_t val_drop = ads.readADC_Differential_2_3();  
+  int16_t val_sense = ads.readADC_Differential_0_1();
   
-  float volts_drop = ADS.toVoltage(val_drop); 
-  float volts_sense = ADS.toVoltage(val_sense); 
+  float volts_drop = (val_drop); 
+  float volts_sense = (val_sense); 
   float r = bigR(volts_drop, volts_sense);
 
   unsigned long elapsedTime = millis() - startTime;
