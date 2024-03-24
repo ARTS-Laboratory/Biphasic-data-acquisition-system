@@ -1,15 +1,17 @@
 #include <Arduino.h>
 #include <Wire.h>
+#include <SPI.h>
 #include <Adafruit_ADS1X15.h>
 
 #define LOGIC1 9 
 #define LOGIC2 8
-//#define DEBUG
+#define DEBUG
 
 Adafruit_ADS1115 ads;
 
 unsigned long start_time = 0;
-float frequency = 1;
+float userfrq = 1;
+float period = 1;
 int in_line = 100;
 const float multiplier = 0.1875F; // For 16 bit dac @ +/-6.144V gain
 
@@ -18,6 +20,7 @@ volatile bool toggle_flag = false;
 
 // Logic flag
 bool L_state = false;
+bool readchk = false;
 unsigned long high_state_start_time = 0;
 unsigned long high_state_duration = 0;
 
@@ -48,12 +51,13 @@ void setup(){
   }
   Serial.println("Good Init");
 
-  Serial.println("Enter frequency (1, 2, 5, 10, 20, 50, 100, 200, 400):");
+  Serial.println("Enter frequency in Hz (1, 2, 5, 10, 20, 50, 100):");
   while (!Serial.available());
 
-  frequency = Serial.parseFloat(); // Read requested frequency from user input
-  Serial.print("Frequency set to: ");
-  Serial.println(frequency);
+  userfrq = Serial.parseFloat(); // Read requested period from user input
+  Serial.print("frequency set to: ");
+  Serial.println(userfrq);
+  period = (0.5 * userfrq);
 
   Serial.println("Enter in-line resistor value: ");
   while (!Serial.available());
@@ -61,10 +65,6 @@ void setup(){
   in_line = Serial.parseInt(); 
   Serial.print("In-line resistance set to: ");
   Serial.println(in_line);
-
-  // Serial.print("vDROP Value,vDROP Voltage,");
-  // Serial.print("vSENSE Value,vSENSE Voltage,");
-  // Serial.println("Structure Resistance (ohms)");
 
   // Init timer1
   noInterrupts();   // disables global interrupts
@@ -74,12 +74,10 @@ void setup(){
   // Calculate OCR1A value
   float clockSpeed = 16000000.0; // Arduino clock speed in Hz
   float prescaler = 1024.0; // Prescaler value
-  float tempOCR1A = clockSpeed / (prescaler * frequency) - 1;
+  float tempOCR1A = clockSpeed / (prescaler * (2*userfrq)) - 1;
 
-  // Round and convert to unsigned long
   unsigned long user_fq = static_cast<unsigned long>(round(tempOCR1A));
 
-  // Validation
   if (user_fq < 1) {
       user_fq = 1; // Minimum practical value to avoid too fast interrupts
   } else if (user_fq > 65535) {
@@ -98,12 +96,12 @@ void setup(){
   TIMSK1 |= (1 << OCIE1A);
 
   interrupts();
-  high_state_duration = 500 / frequency; // in milliseconds
+  high_state_duration = (period)*1E3; 
 
 #ifdef DEBUG
-  unsigned long calculated_frequency = clockSpeed / (prescaler * (OCR1A + 1));
-  Serial.print("Calculated Frequency: ");
-  Serial.print(calculated_frequency);
+  unsigned long calculated_period = clockSpeed / (prescaler * (OCR1A + 1));
+  Serial.print("Calculated period: ");
+  Serial.print(calculated_period);
   Serial.println(" Hz");
   Serial.print("user_fq: ");
   Serial.println(user_fq);
@@ -119,8 +117,10 @@ void loop() {
   }
 
   // Check if H-bridge is high and 80% through its duty cycle
-  while(!(L_state && (micros() - high_state_start_time = 0.8 * high_state_duration))); 
-  readADC();
+  if(!readchk && L_state && (micros() - high_state_start_time >= 0.8 * high_state_duration)){
+    readADC();
+    readchk = true;
+  }
 }
 
 // Timer1 ISR
@@ -132,34 +132,31 @@ void toggleHbridge() {
   L_state = !L_state;
 
   if(L_state){
-    Serial.println("H-bridge high");
+    readchk = false;
     digitalWrite(LOGIC1, HIGH);
     digitalWrite(LOGIC2, LOW);
     high_state_start_time = micros(); // Start timing the high state
   } else {
-    Serial.println("H-bridge low");
     digitalWrite(LOGIC1, LOW);
     digitalWrite(LOGIC2, HIGH);
   }
 }
 
 void readADC() {
-  // if(start_time == 0) { // Check if start time hasn't been initialized
-  //   start_time = millis(); // Record the time when LOGIC1 goes high for the first time
-  // }
+  if(start_time == 0) { // Check if start time hasn't been initialized
+    start_time = millis(); // Record the time when LOGIC1 goes high for the first time
+  }
 
-  // int16_t val_drop = ads.readADC_Differential_2_3();  
-  // int16_t val_sense = ads.readADC_Differential_0_1();
+  int16_t val_drop = ads.readADC_Differential_2_3();  
+  int16_t val_sense = ads.readADC_Differential_0_1();
   
-  // float volts_drop = val_drop * multiplier;
-  // float volts_sense = val_sense * multiplier; 
-  // float r = bigR(volts_drop, volts_sense, in_line);
-  // unsigned long elapsed_time = millis() - start_time;
+  float volts_drop = val_drop * multiplier;
+  float volts_sense = val_sense * multiplier; 
+  float r = bigR(volts_drop, volts_sense, in_line);
+  unsigned long elapsed_time = millis() - start_time;
 
-  // Serial.print(elapsed_time); Serial.print("\t");
-  // Serial.print(val_drop); Serial.print("\t"); Serial.print(volts_drop, 7);Serial.print("\t");
-  // Serial.print(val_sense); Serial.print("\t"); Serial.print(volts_sense, 7);Serial.print("\t");
-  // Serial.println(r,7); 
+  Serial.print(elapsed_time); Serial.print(",");
+  Serial.println(r,7); 
 }
 
 float bigR(float drop, float sense, int in_l){
