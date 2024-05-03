@@ -1,38 +1,54 @@
 import matplotlib.pyplot as plt
-import pandas as pd
-import os
 import numpy as np
+import os
 
-directory = "./biphtestdata"
+good_files = ['1Hz.txt', '2Hz.txt', '5Hz.txt', '10Hz.txt']
+cracked_files = ['1HzCracked.txt', '2HzCracked.txt', '5HzCracked.txt', '10HzCracked.txt']
+good_labels = ['1Hz Solid', '2Hz Solid', '5Hz Solid', '10Hz Solid']
+cracked_labels = ['1Hz Cracked', '2Hz Cracked', '5Hz Cracked', '10Hz Cracked']
 
-filenames = ["1Hz.txt", "2Hz.txt", "5Hz.txt", "20Hz.txt", "50Hz.txt"]
+all_files = good_files + cracked_files
+all_labels = good_labels + cracked_labels
 
-plt.figure(figsize=(5,5))
+fig, axes = plt.subplots(nrows=3, ncols=1, figsize=(12, 10))
 
-for file in filenames:
-    file_path = os.path.join(directory, file)
-    data = pd.read_csv(file_path)
-    data['time'] = pd.to_numeric(data['time'], errors='coerce')
-    data_filtered = data[data["time"] <= 100000]
+for file_name, label in zip(good_files, good_labels):
+    file_path = os.path.join('./biphtestdata/', file_name)
+    data = np.loadtxt(file_path, delimiter=',')
+    time_ms = data[:, 0]
+    resistance_ohms = data[:, 1]
+    axes[0].plot(time_ms, resistance_ohms, label=label)
 
-    # Further filter data to exclude resistance values outside 83.0 to 86.0 ohms
-    data_filtered = data_filtered[(data_filtered["Structure Resistance (ohms)"] >= 84.0) & 
-                                  (data_filtered["Structure Resistance (ohms)"] <= 86.0)]
+axes[0].set_xlabel('time (ms)')
+axes[0].set_ylabel('resistance (ohms)')
+axes[0].legend()
+axes[0].grid(True)
 
-    time = data_filtered["time"]
-    resistance = data_filtered["Structure Resistance (ohms)"]
+for file_name, label in zip(cracked_files, cracked_labels):
+    file_path = os.path.join('./biphtestdata/', file_name)
+    data = np.loadtxt(file_path, delimiter=',')
+    time_ms = data[:, 0]
+    resistance_ohms = data[:, 1]
+    axes[1].plot(time_ms, resistance_ohms, label=label)
 
-    plt.plot(time, resistance, label=f"{file.split('.')[0]} Hz")
+axes[1].set_xlabel('time (ms)')
+axes[1].set_ylabel('resistance (ohms)')
+axes[1].legend()
+axes[1].grid(True)
 
-# Set specific y-axis bounds and tick marks
-plt.ylim(84.0, 85.75)
-plt.yticks(np.arange(84.0, 85.75, 0.1))
+for file_name, label in zip(all_files, all_labels):
+    file_path = os.path.join('./biphtestdata/', file_name)
+    data = np.loadtxt(file_path, delimiter=',')
+    time_ms = data[:, 0]
+    resistance_ohms = data[:, 1]
+    axes[2].plot(time_ms, resistance_ohms, label=label)
 
-plt.xlabel("time (ms)")
-plt.ylabel("resistance (ohms)")
-plt.title("Four Probe Differential, 5Vin, 100-Ohm known")
-plt.legend()
-plt.grid(True)
+axes[2].set_xlabel('time (ms)')
+axes[2].set_ylabel('resistance (ohms)')
+axes[2].legend()
+axes[2].grid(True)
+
+plt.suptitle('330 ohm, 5V H-brdige, solid and cracked sample')
+plt.tight_layout()
+
 plt.show()
-
-
