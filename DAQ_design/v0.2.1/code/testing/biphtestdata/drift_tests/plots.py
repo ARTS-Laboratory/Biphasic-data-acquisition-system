@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import os
+import labellines
 
 # set default fonts and plot colors
 plt.rcParams.update({'text.usetex': True})
@@ -16,15 +17,18 @@ plt.rcParams.update({'mathtext.fontset': 'custom'}) # I don't think I need this 
 cc = plt.rcParams['axes.prop_cycle'].by_key()['color']
 plt.close('all')
 
-file_names = ['20Hz_5p6M_doped.txt', '10Hz_5p6M_doped.txt', '5Hz_5p6M_doped.txt', '2Hz_5p6M_doped.txt', '1Hz_5p6M_doped.txt']
+file_names = ['1ohm.txt', '10ohm.txt', '100ohm.txt', '680ohm.txt', '3p3kohm.txt', '7p5kohm.txt', '15kohm.txt', '56kohm.txt',
+              '100kohm.txt', '330kohm.txt', '680kohm.txt', '1p5Mohm.txt', '3p3Mohm.txt']
+labels = ['1 $\Omega$', '10 $\Omega$', '100 $\Omega$', '680 $\Omega$', '3.3 k$\Omega$', '7.5 k$\Omega$', '15 k$\Omega$', '56 k$\Omega$',
+        '100 k$\Omega$', '330 k$\Omega$', '680 k$\Omega$', '1.5 M$\Omega$', '3.3 M$\Omega$']
 
-plt.figure(figsize=(12, 8))
+plt.figure(figsize=(5, 5))
 
 ax = plt.axes()
 ax.set_xlabel('time (ms)')
 ax.set_ylabel('resistance (ohms)')
 
-for file_name in file_names:
+for i, file_name in enumerate(file_names):
     file_path = os.path.join('./data', file_name)
     data = []
     with open(file_path, 'r') as file:
@@ -40,10 +44,12 @@ for file_name in file_names:
         data = np.array(data)
         time_ms = data[:, 0]
         resistance_ohms = -data[:, 1]
-        plt.plot(time_ms, resistance_ohms, label=file_name)
+        plt.plot(time_ms, resistance_ohms, label=labels[i])
 
-plt.title('Two probe, 5.6Mohm known resistor')
-plt.legend()
+plt.title('Drift Tests - 120s - 5Hz')
+#plt.legend()
+lines = plt.gca().get_lines()
+labellines.labelLines(lines, align=True)
 plt.tight_layout()
-plt.savefig('./figs/two_probe_s1_5p6_530.png', dpi=300)
+plt.savefig('./figs/drift_testing.png', dpi=300)
 plt.show()
