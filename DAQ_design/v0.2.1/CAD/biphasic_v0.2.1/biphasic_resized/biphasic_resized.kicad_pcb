@@ -357,9 +357,9 @@
     (pad "7" thru_hole circle (at 30.48 0 270) (size 3 3) (drill 2) (layers "*.Cu" "*.Mask")
       (net 6 "AIN0") (pinfunction "Pin_7") (pintype "passive") (tstamp 9d2b94c4-7507-47e8-8f20-4b33c2f6c1d3))
     (model "${KICAD6_3DMODEL_DIR}/TerminalBlock_Phoenix.3dshapes/TerminalBlock_Phoenix_MKDS-1,5-7-5.08_1x07_P5.08mm_Horizontal.wrl"
-      (offset (xyz 0 0 0))
+      (offset (xyz 30.5 0 0))
       (scale (xyz 1 1 1))
-      (rotate (xyz 0 0 0))
+      (rotate (xyz 0 0 180))
     )
   )
 
@@ -665,6 +665,11 @@
       (net 9 "AIN3") (pinfunction "AIN3") (pintype "input") (tstamp 5bae0aff-8894-4dc3-bd5b-be7889d4cefa))
     (pad "11" thru_hole circle (at 2.54 -14.478 90) (size 3.2 3.2) (drill 2.54) (layers "*.Cu" "*.Mask") (tstamp 92e26f65-8c7e-48b7-a0ca-8812fdc3a201))
     (pad "11" thru_hole circle (at 25.4 -14.478 90) (size 3.2 3.2) (drill 2.54) (layers "*.Cu" "*.Mask") (tstamp b586e851-5187-4457-bc6e-04a7c8ac6159))
+    (model "/home/david/Documents/GitHub/Biphasic-data-acquisition-system/DAQ_design/v0.2.1/CAD/biphasic_v0.2.1/stp_files/ads/16Bit I2C ADC+PGA - ADS1115.stp"
+      (offset (xyz 14 8.5 0))
+      (scale (xyz 1 1 1))
+      (rotate (xyz 0 0 0))
+    )
   )
 
   (footprint "uofsc_foots:github" (layer "F.Cu")
@@ -14933,10 +14938,10 @@
       (net 2 "GND") (pinfunction "GND") (pintype "passive") (tstamp dc6fdf1e-a571-4133-8ab0-c88c0cf72d6e))
     (pad "30" thru_hole oval (at 15.24 0 270) (size 1.6 1.6) (drill 1) (layers "*.Cu" "*.Mask")
       (net 1 "VPP") (pinfunction "VIN") (pintype "power_in") (tstamp 50f7c057-a1d8-4b4e-bec9-0427e36af202))
-    (model "${KICAD6_3DMODEL_DIR}/Module.3dshapes/Arduino_Nano_WithMountingHoles.wrl"
-      (offset (xyz 0 0 0))
+    (model "/home/david/Documents/GitHub/Biphasic-data-acquisition-system/DAQ_design/v0.2.1/CAD/biphasic_v0.2.1/stp_files/ino/arduino nano.STEP"
+      (offset (xyz 0 0 2.5))
       (scale (xyz 1 1 1))
-      (rotate (xyz 0 0 0))
+      (rotate (xyz -90 0 90))
     )
   )
 
