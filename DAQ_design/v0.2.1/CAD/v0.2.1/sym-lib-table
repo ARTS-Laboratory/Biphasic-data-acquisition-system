@@ -1,0 +1,5 @@
+(sym_lib_table
+  (version 7)
+  (lib (name "Charleslabs_Parts")(type "Legacy")(uri "${KIPRJMOD}/pretty/kicad_parts-master/Charleslabs_Parts.lib")(options "")(descr ""))
+  (lib (name "teensy")(type "Legacy")(uri "${KIPRJMOD}/pretty/teensy/teensy_library-master/teensy.lib")(options "")(descr ""))
+)

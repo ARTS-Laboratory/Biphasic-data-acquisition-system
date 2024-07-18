@@ -1,0 +1,4 @@
+(sym_lib_table
+  (version 7)
+  (lib (name "teensy")(type "Legacy")(uri "/home/david/Documents/GitHub/Biphasic-data-acquisition-system/DAQ_design/v0.2.1/CAD/biphasic_v0.2.1/pretties/teensy/teensy_library-master/teensy.lib")(options "")(descr ""))
+)

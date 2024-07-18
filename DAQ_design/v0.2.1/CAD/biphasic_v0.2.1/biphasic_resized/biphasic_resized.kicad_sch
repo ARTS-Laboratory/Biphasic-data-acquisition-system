@@ -3369,7 +3369,7 @@
 	)
 	(wire
 		(pts
-			(xy 194.31 116.84) (xy 195.58 116.84)
+			(xy 194.31 123.19) (xy 201.93 123.19)
 		)
 		(stroke
 			(width 0)
@@ -3579,7 +3579,7 @@
 	)
 	(wire
 		(pts
-			(xy 194.31 118.11) (xy 194.31 116.84)
+			(xy 194.31 123.19) (xy 194.31 118.11)
 		)
 		(stroke
 			(width 0)
@@ -7878,7 +7878,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 195.58 116.84 0)
+		(at 201.93 123.19 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -7886,7 +7886,7 @@
 		(dnp no)
 		(uuid "fbbac6c6-b4ba-472d-8fc2-33ce646f00f7")
 		(property "Reference" "#PWR015"
-			(at 195.58 123.19 0)
+			(at 201.93 129.54 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7895,7 +7895,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 195.707 121.2342 0)
+			(at 202.057 127.5842 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7903,7 +7903,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 195.58 116.84 0)
+			(at 201.93 123.19 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7912,7 +7912,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 195.58 116.84 0)
+			(at 201.93 123.19 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7921,7 +7921,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 195.58 116.84 0)
+			(at 201.93 123.19 0)
 			(effects
 				(font
 					(size 1.27 1.27)
