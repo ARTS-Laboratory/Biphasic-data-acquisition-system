@@ -3,6 +3,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import json as json
 import pandas as pd
+import re
 
 # set default fonts and plot colors
 plt.rcParams.update({'text.usetex': True})
@@ -23,15 +24,31 @@ def read_voltage_data(filename):
         data = [float(line.strip()) for line in file]
     return data
 
-def plot_voltage_data(data):
+def extract_info_from_filename(filename):
+    pattern = r'SD(\d+Hz)(\d+[kM]?)\.txt'
+    match = re.search(pattern, filename)
+    if match:
+        return match.groups()
+    else:
+        return None, None
+
+def plot_voltage_data(files):
     plt.figure(figsize=(10, 6))
-    plt.plot(data)
+
+    for filename in files:
+        voltage_data = read_voltage_data(filename)
+        freq, resistance = extract_info_from_filename(filename)
+        label = f'{freq} {resistance}'
+        plt.plot(voltage_data, label=label)
+
     plt.xlabel('sample number')
-    plt.ylabel('resistance (ohms)')
+    plt.ylabel('resistance (Ohms)')
+    plt.title('resistance over time with teensy prototype')
+    plt.legend()
     plt.grid(True)
+    plt.savefig('./plots/resistance_plot.png')
     plt.show()
 
 if __name__ == '__main__':
-    filename = './SD10Hz.txt'
-    voltage_data = read_voltage_data(filename)
-    plot_voltage_data(voltage_data)
+    files = ['./SD1Hz680k.txt', './SD5Hz680k.txt', './SD10Hz680k.txt']
+    plot_voltage_data(files)
