@@ -31,11 +31,10 @@ def plot_voltage_data(files, labels):
     plt.title('10 minutes, 220k Ohm')
     plt.legend()
     plt.grid(True)
-    plt.savefig('./plots/220k_resistance_plot_10min.png')
+    plt.savefig('./plots/fig_220k_resistance_plot.png')
     plt.show()
 
 if __name__ == '__main__':
-    files = ['./DC.txt',  './1Hz.txt', './2Hz.txt', './5Hz.txt',
-             './10Hz.txt', './20Hz.txt']
+    files = ['./DC.txt',  './1Hz.txt', './2Hz.txt', './5Hz.txt']
     labels = ['DC', '1Hz', '2Hz', '5Hz', '10Hz', '20Hz']
     plot_voltage_data(files, labels)

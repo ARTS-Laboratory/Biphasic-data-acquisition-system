@@ -11,7 +11,8 @@ OneShotTimer adcTimer;
 
 const int in1 = 0;
 const int in2 = 1;
-int frequency = 1;                       // in Hz
+const int en = 2;
+int frequency = 500;                       // in Hz
 bool toggleState = false;
 int period = 1000 / frequency;            // period in milliseconds
 int halfPeriod = period / 2;              // half period for 50% duty cycle
@@ -50,10 +51,10 @@ float bigR(float drop, float sense, float in_l)
 
 void readADC() 
 {
-  int16_t val_drop = ads.readADC_Differential_2_3();  
-  int16_t val_sense = ads.readADC_Differential_0_1();
+//   int16_t val_drop = ads.readADC_Differential_2_3();  
+//   int16_t val_sense = ads.readADC_Differential_0_1();
 
-  float r = bigR(val_drop, val_sense, in_line);
+  float r = bigR(100.0, 100.0, 1000.0);
 
   dtostrf(r, 6, 3, resistance_str);
   snprintf(buffer, sizeof(buffer), "%s", resistance_str);
@@ -64,24 +65,26 @@ int main()
 {
     Serial.begin(115200);
 
-    ads.setGain(GAIN_TWOTHIRDS);          // +/- 6.144V range
+    // ads.setGain(GAIN_TWOTHIRDS);          // +/- 6.144V range
 
-    if (!ads.begin()) 
-    {
-        Serial.println("Failed to initialize ADS1115");
-        while (1);
-    }
-    Serial.println("Good Init ADC");
+    // if (!ads.begin()) 
+    // {
+    //     Serial.println("Failed to initialize ADS1115");
+    //     while (1);
+    // }
+    // Serial.println("Good Init ADC");
     
     pinMode(in1, OUTPUT);
     pinMode(in2, OUTPUT);
-    digitalWrite(in1, LOW);
-    digitalWrite(in2, LOW);
+    pinMode(en, OUTPUT);
+    digitalWrite(in1, LOW); // nor gates
+    digitalWrite(in2, LOW); // nor gates
 
     // init timers with the callback functions
     timer1.begin(togglePins);
-    //adcTimer.begin(readADC);
+    adcTimer.begin(readADC);
     
+    digitalWrite(en, HIGH);
     timer1.trigger(halfPeriod * 1000);    // start main timer
 
     while(1){;;}
