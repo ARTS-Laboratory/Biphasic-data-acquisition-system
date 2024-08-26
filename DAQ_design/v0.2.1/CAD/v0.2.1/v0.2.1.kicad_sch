@@ -11601,7 +11601,6 @@
 	(symbol
 		(lib_id "DS01C-254-L-09BE:DS01C-254-L-09BE")
 		(at 217.17 124.46 0)
-		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
