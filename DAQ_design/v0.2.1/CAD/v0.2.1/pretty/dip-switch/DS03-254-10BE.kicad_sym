@@ -1,0 +1,338 @@
+
+(kicad_symbol_lib (version 20211014) (generator kicad_symbol_editor)
+  (symbol "DS03-254-10BE" (pin_names (offset 1.016)) (in_bom yes) (on_board yes)
+    (property "Reference" "S" (id 0) (at -2.54 25.4 0)
+      (effects (font (size 1.27 1.27)) (justify bottom left))
+    )
+    (property "Value" "DS03-254-10BE" (id 1) (at -2.54 -25.4 0)
+      (effects (font (size 1.27 1.27)) (justify top left))
+    )
+    (property "Footprint" "DS03-254-10BE:SW_DS03-254-10BE" (id 2) (at 0 0 0)
+      (effects (font (size 1.27 1.27)) (justify bottom) hide)
+    )
+    (property "MF" "CUI Devices" (id 4) (at 0 0 0)
+      (effects (font (size 1.27 1.27)) (justify bottom) hide)
+    )
+    (property "MAXIMUM_PACKAGE_HEIGHT" "9.93 mm" (id 5) (at 0 0 0)
+      (effects (font (size 1.27 1.27)) (justify bottom) hide)
+    )
+    (property "Package" "None" (id 6) (at 0 0 0)
+      (effects (font (size 1.27 1.27)) (justify bottom) hide)
+    )
+    (property "Price" "None" (id 7) (at 0 0 0)
+      (effects (font (size 1.27 1.27)) (justify bottom) hide)
+    )
+    (property "Check_prices" "https://www.snapeda.com/parts/DS03-254-10BE/CUI+Devices/view-part/?ref=eda" (id 8) (at 0 0 0)
+      (effects (font (size 1.27 1.27)) (justify bottom) hide)
+    )
+    (property "STANDARD" "Manufacturer Recommendations" (id 9) (at 0 0 0)
+      (effects (font (size 1.27 1.27)) (justify bottom) hide)
+    )
+    (property "PARTREV" "V1.0" (id 10) (at 0 0 0)
+      (effects (font (size 1.27 1.27)) (justify bottom) hide)
+    )
+    (property "SnapEDA_Link" "https://www.snapeda.com/parts/DS03-254-10BE/CUI+Devices/view-part/?ref=snap" (id 11) (at 0 0 0)
+      (effects (font (size 1.27 1.27)) (justify bottom) hide)
+    )
+    (property "MP" "DS03-254-10BE" (id 12) (at 0 0 0)
+      (effects (font (size 1.27 1.27)) (justify bottom) hide)
+    )
+    (property "Purchase-URL" "https://www.snapeda.com/api/url_track_click_mouser/?unipart_id=4467339&manufacturer=CUI Devices&part_name=DS03-254-10BE&search_term=None" (id 13) (at 0 0 0)
+      (effects (font (size 1.27 1.27)) (justify bottom) hide)
+    )
+    (property "Description" "10 Position, Through Hole, 2.54 mm, Flat Slide Actuator, Convex Bottom, Long Pin, DIP Switch" (id 14) (at 0 0 0)
+      (effects (font (size 1.27 1.27)) (justify bottom) hide)
+    )
+    (property "CUI_purchase_URL" "https://www.cuidevices.com/product/switches/dip-switches/ds03-254-10be?utm_source=snapeda.com&utm_medium=referral&utm_campaign=snapedaBOM" (id 15) (at 0 0 0)
+      (effects (font (size 1.27 1.27)) (justify bottom) hide)
+    )
+    (property "Availability" "In Stock" (id 16) (at 0 0 0)
+      (effects (font (size 1.27 1.27)) (justify bottom) hide)
+    )
+    (property "MANUFACTURER" "CUI Inc." (id 17) (at 0 0 0)
+      (effects (font (size 1.27 1.27)) (justify bottom) hide)
+    )
+    (symbol "DS03-254-10BE_0_0"
+      (polyline
+        (pts (xy -2.54 22.86) (xy 2.794 24.9936)) (stroke (width 0.1524))
+      )
+      (circle (center 2.54 22.86) (radius 0.3302)
+        (stroke (width 0.1524)) (fill (type none))
+      )
+      (polyline
+        (pts (xy 5.08 22.86) (xy 2.921 22.86)) (stroke (width 0.1524))
+      )
+      (polyline
+        (pts (xy -2.54 22.86) (xy -5.08 22.86)) (stroke (width 0.1524))
+      )
+      (polyline
+        (pts (xy -2.54 17.78) (xy 2.794 19.9136)) (stroke (width 0.1524))
+      )
+      (circle (center 2.54 17.78) (radius 0.3302)
+        (stroke (width 0.1524)) (fill (type none))
+      )
+      (polyline
+        (pts (xy 5.08 17.78) (xy 2.921 17.78)) (stroke (width 0.1524))
+      )
+      (polyline
+        (pts (xy -2.54 17.78) (xy -5.08 17.78)) (stroke (width 0.1524))
+      )
+      (polyline
+        (pts (xy -2.54 12.7) (xy 2.794 14.8336)) (stroke (width 0.1524))
+      )
+      (circle (center 2.54 12.7) (radius 0.3302)
+        (stroke (width 0.1524)) (fill (type none))
+      )
+      (polyline
+        (pts (xy 5.08 12.7) (xy 2.921 12.7)) (stroke (width 0.1524))
+      )
+      (polyline
+        (pts (xy -2.54 12.7) (xy -5.08 12.7)) (stroke (width 0.1524))
+      )
+      (polyline
+        (pts (xy -2.54 7.62) (xy 2.794 9.7536)) (stroke (width 0.1524))
+      )
+      (circle (center 2.54 7.62) (radius 0.3302)
+        (stroke (width 0.1524)) (fill (type none))
+      )
+      (polyline
+        (pts (xy 5.08 7.62) (xy 2.921 7.62)) (stroke (width 0.1524))
+      )
+      (polyline
+        (pts (xy -2.54 7.62) (xy -5.08 7.62)) (stroke (width 0.1524))
+      )
+      (polyline
+        (pts (xy -2.54 2.54) (xy 2.794 4.6736)) (stroke (width 0.1524))
+      )
+      (circle (center 2.54 2.54) (radius 0.3302)
+        (stroke (width 0.1524)) (fill (type none))
+      )
+      (polyline
+        (pts (xy 5.08 2.54) (xy 2.921 2.54)) (stroke (width 0.1524))
+      )
+      (polyline
+        (pts (xy -2.54 2.54) (xy -5.08 2.54)) (stroke (width 0.1524))
+      )
+      (polyline
+        (pts (xy -2.54 -2.54) (xy 2.794 -0.4064)) (stroke (width 0.1524))
+      )
+      (circle (center 2.54 -2.54) (radius 0.3302)
+        (stroke (width 0.1524)) (fill (type none))
+      )
+      (polyline
+        (pts (xy 5.08 -2.54) (xy 2.921 -2.54)) (stroke (width 0.1524))
+      )
+      (polyline
+        (pts (xy -2.54 -2.54) (xy -5.08 -2.54)) (stroke (width 0.1524))
+      )
+      (polyline
+        (pts (xy -2.54 -7.62) (xy 2.794 -5.4864)) (stroke (width 0.1524))
+      )
+      (circle (center 2.54 -7.62) (radius 0.3302)
+        (stroke (width 0.1524)) (fill (type none))
+      )
+      (polyline
+        (pts (xy 5.08 -7.62) (xy 2.921 -7.62)) (stroke (width 0.1524))
+      )
+      (polyline
+        (pts (xy -2.54 -7.62) (xy -5.08 -7.62)) (stroke (width 0.1524))
+      )
+      (polyline
+        (pts (xy -2.54 -12.7) (xy 2.794 -10.5664)) (stroke (width 0.1524))
+      )
+      (circle (center 2.54 -12.7) (radius 0.3302)
+        (stroke (width 0.1524)) (fill (type none))
+      )
+      (polyline
+        (pts (xy 5.08 -12.7) (xy 2.921 -12.7)) (stroke (width 0.1524))
+      )
+      (polyline
+        (pts (xy -2.54 -12.7) (xy -5.08 -12.7)) (stroke (width 0.1524))
+      )
+      (polyline
+        (pts (xy -2.54 -17.78) (xy 2.794 -15.6464)) (stroke (width 0.1524))
+      )
+      (circle (center 2.54 -17.78) (radius 0.3302)
+        (stroke (width 0.1524)) (fill (type none))
+      )
+      (polyline
+        (pts (xy 5.08 -17.78) (xy 2.921 -17.78)) (stroke (width 0.1524))
+      )
+      (polyline
+        (pts (xy -2.54 -17.78) (xy -5.08 -17.78)) (stroke (width 0.1524))
+      )
+      (polyline
+        (pts (xy -2.54 -22.86) (xy 2.794 -20.7264)) (stroke (width 0.1524))
+      )
+      (circle (center 2.54 -22.86) (radius 0.3302)
+        (stroke (width 0.1524)) (fill (type none))
+      )
+      (polyline
+        (pts (xy 5.08 -22.86) (xy 2.921 -22.86)) (stroke (width 0.1524))
+      )
+      (polyline
+        (pts (xy -2.54 -22.86) (xy -5.08 -22.86)) (stroke (width 0.1524))
+      )
+      (pin passive line (at -7.62 22.86 0) (length 2.54)
+        (name "~"
+          (effects (font (size 1.016 1.016)))
+        )
+        (number "1A"
+          (effects (font (size 1.016 1.016)))
+        )
+      )
+      (pin passive line (at 7.62 22.86 180.0) (length 2.54)
+        (name "~"
+          (effects (font (size 1.016 1.016)))
+        )
+        (number "1B"
+          (effects (font (size 1.016 1.016)))
+        )
+      )
+      (pin passive line (at -7.62 17.78 0) (length 2.54)
+        (name "~"
+          (effects (font (size 1.016 1.016)))
+        )
+        (number "2A"
+          (effects (font (size 1.016 1.016)))
+        )
+      )
+      (pin passive line (at 7.62 17.78 180.0) (length 2.54)
+        (name "~"
+          (effects (font (size 1.016 1.016)))
+        )
+        (number "2B"
+          (effects (font (size 1.016 1.016)))
+        )
+      )
+      (pin passive line (at -7.62 12.7 0) (length 2.54)
+        (name "~"
+          (effects (font (size 1.016 1.016)))
+        )
+        (number "3A"
+          (effects (font (size 1.016 1.016)))
+        )
+      )
+      (pin passive line (at 7.62 12.7 180.0) (length 2.54)
+        (name "~"
+          (effects (font (size 1.016 1.016)))
+        )
+        (number "3B"
+          (effects (font (size 1.016 1.016)))
+        )
+      )
+      (pin passive line (at -7.62 7.62 0) (length 2.54)
+        (name "~"
+          (effects (font (size 1.016 1.016)))
+        )
+        (number "4A"
+          (effects (font (size 1.016 1.016)))
+        )
+      )
+      (pin passive line (at 7.62 7.62 180.0) (length 2.54)
+        (name "~"
+          (effects (font (size 1.016 1.016)))
+        )
+        (number "4B"
+          (effects (font (size 1.016 1.016)))
+        )
+      )
+      (pin passive line (at -7.62 2.54 0) (length 2.54)
+        (name "~"
+          (effects (font (size 1.016 1.016)))
+        )
+        (number "5A"
+          (effects (font (size 1.016 1.016)))
+        )
+      )
+      (pin passive line (at 7.62 2.54 180.0) (length 2.54)
+        (name "~"
+          (effects (font (size 1.016 1.016)))
+        )
+        (number "5B"
+          (effects (font (size 1.016 1.016)))
+        )
+      )
+      (pin passive line (at -7.62 -2.54 0) (length 2.54)
+        (name "~"
+          (effects (font (size 1.016 1.016)))
+        )
+        (number "6A"
+          (effects (font (size 1.016 1.016)))
+        )
+      )
+      (pin passive line (at 7.62 -2.54 180.0) (length 2.54)
+        (name "~"
+          (effects (font (size 1.016 1.016)))
+        )
+        (number "6B"
+          (effects (font (size 1.016 1.016)))
+        )
+      )
+      (pin passive line (at -7.62 -7.62 0) (length 2.54)
+        (name "~"
+          (effects (font (size 1.016 1.016)))
+        )
+        (number "7A"
+          (effects (font (size 1.016 1.016)))
+        )
+      )
+      (pin passive line (at 7.62 -7.62 180.0) (length 2.54)
+        (name "~"
+          (effects (font (size 1.016 1.016)))
+        )
+        (number "7B"
+          (effects (font (size 1.016 1.016)))
+        )
+      )
+      (pin passive line (at -7.62 -12.7 0) (length 2.54)
+        (name "~"
+          (effects (font (size 1.016 1.016)))
+        )
+        (number "8A"
+          (effects (font (size 1.016 1.016)))
+        )
+      )
+      (pin passive line (at 7.62 -12.7 180.0) (length 2.54)
+        (name "~"
+          (effects (font (size 1.016 1.016)))
+        )
+        (number "8B"
+          (effects (font (size 1.016 1.016)))
+        )
+      )
+      (pin passive line (at -7.62 -17.78 0) (length 2.54)
+        (name "~"
+          (effects (font (size 1.016 1.016)))
+        )
+        (number "9A"
+          (effects (font (size 1.016 1.016)))
+        )
+      )
+      (pin passive line (at 7.62 -17.78 180.0) (length 2.54)
+        (name "~"
+          (effects (font (size 1.016 1.016)))
+        )
+        (number "9B"
+          (effects (font (size 1.016 1.016)))
+        )
+      )
+      (pin passive line (at -7.62 -22.86 0) (length 2.54)
+        (name "~"
+          (effects (font (size 1.016 1.016)))
+        )
+        (number "10A"
+          (effects (font (size 1.016 1.016)))
+        )
+      )
+      (pin passive line (at 7.62 -22.86 180.0) (length 2.54)
+        (name "~"
+          (effects (font (size 1.016 1.016)))
+        )
+        (number "10B"
+          (effects (font (size 1.016 1.016)))
+        )
+      )
+    )
+  )
+)

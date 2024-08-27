@@ -22,71 +22,113 @@ const float multiplier = 0.1875F;         // for 16 bit dac @ +/-6.144V gain
 char buffer[64]; 
 char resistance_str[16];
 
-void togglePins()
-{
-    if (toggleState)
-    {
-			  CORE_PIN0_PORTSET = CORE_PIN0_BITMASK;
-			  CORE_PIN1_PORTCLEAR = CORE_PIN1_BITMASK;
-        adcTimer.trigger(adcDelay * 1000); // convert to microseconds
-    }
-    else
-    {
-			  CORE_PIN0_PORTCLEAR = CORE_PIN0_BITMASK;
-			  CORE_PIN1_PORTSET = CORE_PIN1_BITMASK;
-    }
-    toggleState = !toggleState;
+const unsigned long SamplePeriod = 1000;  // sampling period in milliseconds
+const uint8_t dataPin = 3;   // connected to 74HC165 QH (9) pin
+const uint8_t latchPin = 4;  // connected to 74HC165 SH/LD (1) pin
+const uint8_t clockPin = 5;  // connected to 74HC165 CLK (2) pin
 
-    timer1.trigger(halfPeriod * 1000);    // restart the main timer for the next toggle
+void setup() {
+  Serial.begin(9600);
+  
+  pinMode(latchPin, OUTPUT);
+  pinMode(clockPin, OUTPUT);
+  pinMode(dataPin, INPUT);
 }
 
-
-
-float bigR(float drop, float sense, float in_l)
-{
-    float i_calculated = (drop * multiplier) / in_l;
-    float R = (sense * multiplier) / i_calculated;
-    return R;
+uint8_t readDIPSwitches() {
+  digitalWrite(latchPin, LOW);  // Pulse the latch pin to load the parallel data
+  delayMicroseconds(5);
+  digitalWrite(latchPin, HIGH);
+  
+  uint8_t switchState = 0;
+  for (int i = 0; i < 8; i++) {
+    switchState |= (digitalRead(dataPin) << i); // Read each bit
+    digitalWrite(clockPin, HIGH); // Pulse the clock to shift the next bit
+    delayMicroseconds(5);
+    digitalWrite(clockPin, LOW);
+  }
+  
+  return switchState;
 }
 
-void readADC() 
-{
-//   int16_t val_drop = ads.readADC_Differential_2_3();  
-//   int16_t val_sense = ads.readADC_Differential_0_1();
-
-  float r = bigR(100.0, 100.0, 1000.0);
-
-  dtostrf(r, 6, 3, resistance_str);
-  snprintf(buffer, sizeof(buffer), "%s", resistance_str);
-  Serial.println(buffer);
+void loop() {
+  uint8_t switchState = readDIPSwitches();
+  
+  for (int i = 0; i < 8; i++) {
+    Serial.print("Switch ");
+    Serial.print(i);
+    Serial.print(": ");
+    Serial.println((switchState & (1 << i)) ? "OFF" : "ON");
+  }
+  Serial.println();
+  delay(500);
 }
 
-int main() 
-{
-    Serial.begin(115200);
+// void togglePins()
+// {
+//     if (toggleState)
+//     {
+// 			  CORE_PIN0_PORTSET = CORE_PIN0_BITMASK;
+// 			  CORE_PIN1_PORTCLEAR = CORE_PIN1_BITMASK;
+//         adcTimer.trigger(adcDelay * 1000); // convert to microseconds
+//     }
+//     else
+//     {
+// 			  CORE_PIN0_PORTCLEAR = CORE_PIN0_BITMASK;
+// 			  CORE_PIN1_PORTSET = CORE_PIN1_BITMASK;
+//     }
+//     toggleState = !toggleState;
 
-    // ads.setGain(GAIN_TWOTHIRDS);          // +/- 6.144V range
+//     timer1.trigger(halfPeriod * 1000);    // restart the main timer for the next toggle
+// }
 
-    // if (!ads.begin()) 
-    // {
-    //     Serial.println("Failed to initialize ADS1115");
-    //     while (1);
-    // }
-    // Serial.println("Good Init ADC");
+
+
+// float bigR(float drop, float sense, float in_l)
+// {
+//     float i_calculated = (drop * multiplier) / in_l;
+//     float R = (sense * multiplier) / i_calculated;
+//     return R;
+// }
+
+// void readADC() 
+// {
+// //   int16_t val_drop = ads.readADC_Differential_2_3();  
+// //   int16_t val_sense = ads.readADC_Differential_0_1();
+
+//   float r = bigR(100.0, 100.0, 1000.0);
+
+//   dtostrf(r, 6, 3, resistance_str);
+//   snprintf(buffer, sizeof(buffer), "%s", resistance_str);
+//   Serial.println(buffer);
+// }
+
+// int main() 
+// {
+//     Serial.begin(115200);
+
+//     // ads.setGain(GAIN_TWOTHIRDS);          // +/- 6.144V range
+
+//     // if (!ads.begin()) 
+//     // {
+//     //     Serial.println("Failed to initialize ADS1115");
+//     //     while (1);
+//     // }
+//     // Serial.println("Good Init ADC");
     
-    pinMode(in1, OUTPUT);
-    pinMode(in2, OUTPUT);
-    pinMode(en, OUTPUT);
-    digitalWrite(in1, LOW); // nor gates
-    digitalWrite(in2, LOW); // nor gates
+//     pinMode(in1, OUTPUT);
+//     pinMode(in2, OUTPUT);
+//     pinMode(en, OUTPUT);
+//     digitalWrite(in1, LOW); // nor gates
+//     digitalWrite(in2, LOW); // nor gates
 
-    // init timers with the callback functions
-    timer1.begin(togglePins);
-    adcTimer.begin(readADC);
+//     // init timers with the callback functions
+//     timer1.begin(togglePins);
+//     adcTimer.begin(readADC);
     
-    digitalWrite(en, HIGH);
-    timer1.trigger(halfPeriod * 1000);    // start main timer
+//     digitalWrite(en, HIGH);
+//     timer1.trigger(halfPeriod * 1000);    // start main timer
 
-    while(1){;;}
-    return 0;
-}
+//     while(1){;;}
+//     return 0;
+// }
