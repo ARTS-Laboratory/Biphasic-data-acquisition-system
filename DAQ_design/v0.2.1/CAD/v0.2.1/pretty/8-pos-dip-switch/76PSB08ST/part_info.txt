@@ -1,0 +1,9 @@
+Manufacturer=Grayhill
+PartNumber=76PSB08ST
+PartCategory=Switch
+PackageCategory=Other
+PinCount=16
+Version=1.4
+Released=2021-05-13 18:35:54
+Downloaded=2024-10-28 14:27:56
+3D=Y

@@ -2,4 +2,5 @@
   (version 7)
   (lib (name "teensy.pretty-master")(type "KiCad")(uri "${KIPRJMOD}/pretty/teensy/teensy.pretty-master")(options "")(descr ""))
   (lib (name "Charleslabs_Parts")(type "KiCad")(uri "${KIPRJMOD}/pretty/kicad_parts-master/Charleslabs_Parts.pretty")(options "")(descr ""))
+  (lib (name "8-pos-dip-switch-foot")(type "KiCad")(uri "${KIPRJMOD}/pretty/8-pos-dip-switch/76PSB08ST/KiCad")(options "")(descr ""))
 )
