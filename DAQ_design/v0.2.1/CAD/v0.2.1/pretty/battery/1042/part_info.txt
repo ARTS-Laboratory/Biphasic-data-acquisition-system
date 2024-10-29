@@ -1,0 +1,9 @@
+Manufacturer=Keystone Electronics
+PartNumber=1042
+PartCategory=Undefined or Miscellaneous
+PackageCategory=Other
+PinCount=2
+Version=1.1
+Released=2015-12-18 11:58:44
+Downloaded=2024-10-29 19:01:24
+3D=Y
