@@ -4918,6 +4918,12 @@
 		(uuid "b2f66a24-8782-4f37-b13d-5ee06ddb4633")
 	)
 	(junction
+		(at 130.81 170.18)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "b479de02-9d8d-46dc-909c-cfd8a28daa6a")
+	)
+	(junction
 		(at 139.7 105.41)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -4942,16 +4948,10 @@
 		(uuid "c46a30f7-c94f-4eb7-946c-0feeaac9db2c")
 	)
 	(junction
-		(at 114.3 177.8)
+		(at 114.3 170.18)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "d8aefa28-b7e4-4c2b-a815-9dee54c100c4")
-	)
-	(junction
-		(at 130.81 177.8)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "d9f7504e-cf58-4891-8454-5aa82e0a06e2")
 	)
 	(junction
 		(at 40.64 144.78)
@@ -5029,7 +5029,7 @@
 	)
 	(wire
 		(pts
-			(xy 124.46 177.8) (xy 130.81 177.8)
+			(xy 124.46 170.18) (xy 130.81 170.18)
 		)
 		(stroke
 			(width 0)
@@ -5049,7 +5049,7 @@
 	)
 	(wire
 		(pts
-			(xy 130.81 177.8) (xy 130.81 189.23)
+			(xy 130.81 170.18) (xy 130.81 181.61)
 		)
 		(stroke
 			(width 0)
@@ -5069,7 +5069,7 @@
 	)
 	(wire
 		(pts
-			(xy 107.95 177.8) (xy 114.3 177.8)
+			(xy 107.95 170.18) (xy 114.3 170.18)
 		)
 		(stroke
 			(width 0)
@@ -5359,6 +5359,16 @@
 	)
 	(wire
 		(pts
+			(xy 130.81 170.18) (xy 144.78 170.18)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b5208ba7-8a16-4862-b3a4-3268b5c78b31")
+	)
+	(wire
+		(pts
 			(xy 45.72 147.32) (xy 45.72 163.83)
 		)
 		(stroke
@@ -5379,7 +5389,7 @@
 	)
 	(wire
 		(pts
-			(xy 114.3 177.8) (xy 114.3 189.23)
+			(xy 114.3 170.18) (xy 114.3 181.61)
 		)
 		(stroke
 			(width 0)
@@ -5479,7 +5489,7 @@
 	)
 	(wire
 		(pts
-			(xy 114.3 177.8) (xy 119.38 177.8)
+			(xy 114.3 170.18) (xy 119.38 170.18)
 		)
 		(stroke
 			(width 0)
@@ -5566,16 +5576,6 @@
 			(type default)
 		)
 		(uuid "ff0dfde6-9548-4713-b305-9fd5808660af")
-	)
-	(wire
-		(pts
-			(xy 130.81 177.8) (xy 144.78 177.8)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "ff561910-cf6b-44c0-b65f-492c8995e0ce")
 	)
 	(global_label "OPT1"
 		(shape input)
@@ -5755,7 +5755,7 @@
 	)
 	(global_label "IN0"
 		(shape input)
-		(at 33.02 144.78 180)
+		(at 33.02 152.4 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -5765,7 +5765,7 @@
 		)
 		(uuid "163400d3-184f-43a5-abc2-1b11df0ec0bc")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 26.89 144.78 0)
+			(at 26.89 152.4 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5821,7 +5821,7 @@
 	)
 	(global_label "IN2"
 		(shape input)
-		(at 33.02 149.86 180)
+		(at 33.02 144.78 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -5831,7 +5831,7 @@
 		)
 		(uuid "214966a6-b4a4-4753-9747-dfd6e47886b1")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 26.89 149.86 0)
+			(at 26.89 144.78 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5887,7 +5887,7 @@
 	)
 	(global_label "ADC_SCL"
 		(shape input)
-		(at 29.21 96.52 180)
+		(at 29.21 88.9 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -5897,7 +5897,7 @@
 		)
 		(uuid "2b20bd20-b6e0-4058-8bc5-2f4fa42a4581")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 18.121 96.52 0)
+			(at 18.121 88.9 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6239,7 +6239,7 @@
 	)
 	(global_label "EX+"
 		(shape input)
-		(at 107.95 177.8 180)
+		(at 107.95 170.18 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -6249,7 +6249,7 @@
 		)
 		(uuid "8e26e8c2-957d-4c58-be70-ab14cf395feb")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 101.0339 177.8 0)
+			(at 101.0339 170.18 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6459,7 +6459,7 @@
 	)
 	(global_label "IN0"
 		(shape input)
-		(at 114.3 189.23 270)
+		(at 114.3 181.61 270)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -6469,7 +6469,7 @@
 		)
 		(uuid "ab7555c2-b676-4054-99ac-fc29b53178ae")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 114.3 195.36 90)
+			(at 114.3 187.74 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6503,7 +6503,7 @@
 	)
 	(global_label "EX-"
 		(shape input)
-		(at 144.78 175.26 180)
+		(at 144.78 172.72 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -6513,7 +6513,7 @@
 		)
 		(uuid "ad1509e0-0134-47ab-9de6-63bd5d43734f")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 137.8639 175.26 0)
+			(at 137.8639 172.72 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6613,7 +6613,7 @@
 	)
 	(global_label "IN2"
 		(shape input)
-		(at 144.78 170.18 180)
+		(at 144.78 177.8 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -6623,7 +6623,7 @@
 		)
 		(uuid "b734cead-78df-42c0-a152-b662f29a4e03")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 138.65 170.18 0)
+			(at 138.65 177.8 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6635,7 +6635,7 @@
 	)
 	(global_label "IN3"
 		(shape input)
-		(at 144.78 172.72 180)
+		(at 144.78 175.26 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -6645,7 +6645,7 @@
 		)
 		(uuid "b7b14e62-174a-4dce-beed-e1388c29edaa")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 138.65 172.72 0)
+			(at 138.65 175.26 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6701,7 +6701,7 @@
 	)
 	(global_label "IN1"
 		(shape input)
-		(at 130.81 189.23 270)
+		(at 130.81 181.61 270)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -6711,7 +6711,7 @@
 		)
 		(uuid "bfba3f09-1a7a-414e-a086-1f497b6d959c")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 130.81 195.36 90)
+			(at 130.81 187.74 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6745,7 +6745,7 @@
 	)
 	(global_label "IN3"
 		(shape input)
-		(at 33.02 152.4 180)
+		(at 33.02 147.32 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -6755,7 +6755,7 @@
 		)
 		(uuid "c22dae5a-7adb-4811-9a62-a04459866c7c")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 26.89 152.4 0)
+			(at 26.89 147.32 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6767,7 +6767,7 @@
 	)
 	(global_label "ADC_SDA"
 		(shape input)
-		(at 29.21 93.98 180)
+		(at 29.21 91.44 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -6777,7 +6777,7 @@
 		)
 		(uuid "c7602942-d186-43dd-84ba-3399de1b992a")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 18.0605 93.98 0)
+			(at 18.0605 91.44 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6789,7 +6789,7 @@
 	)
 	(global_label "IN1"
 		(shape input)
-		(at 33.02 147.32 180)
+		(at 33.02 149.86 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -6799,7 +6799,7 @@
 		)
 		(uuid "cb4f2754-ef4a-4125-8f1d-83f1d3559910")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 26.89 147.32 0)
+			(at 26.89 149.86 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8581,7 +8581,7 @@
 	)
 	(symbol
 		(lib_id "Isolator:PC817")
-		(at 191.77 45.72 0)
+		(at 191.77 27.94 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -8590,7 +8590,7 @@
 		(fields_autoplaced yes)
 		(uuid "54af0bc0-35e2-45d2-b974-401bb9244f0c")
 		(property "Reference" "U5"
-			(at 191.77 36.83 0)
+			(at 191.77 19.05 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8598,7 +8598,7 @@
 			)
 		)
 		(property "Value" "PC817"
-			(at 191.77 39.37 0)
+			(at 191.77 21.59 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8606,7 +8606,7 @@
 			)
 		)
 		(property "Footprint" "Package_DIP:DIP-4_W7.62mm"
-			(at 186.69 50.8 0)
+			(at 186.69 33.02 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8617,7 +8617,7 @@
 			)
 		)
 		(property "Datasheet" "http://www.soselectronic.cz/a_info/resource/d/pc817.pdf"
-			(at 191.77 45.72 0)
+			(at 191.77 27.94 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8627,7 +8627,7 @@
 			)
 		)
 		(property "Description" "DC Optocoupler, Vce 35V, CTR 50-300%, DIP-4"
-			(at 191.77 45.72 0)
+			(at 191.77 27.94 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9301,73 +9301,6 @@
 			(project "v0.2.1"
 				(path "/f5ecb7fa-5db2-4074-ab55-2fe6f1a25df0"
 					(reference "#PWR041")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:+3.3V")
-		(at 29.21 71.12 90)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "718e549d-9d84-4ef1-82fa-c8dcb0d56467")
-		(property "Reference" "#PWR037"
-			(at 33.02 71.12 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "+3.3V"
-			(at 25.4 71.1199 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" ""
-			(at 29.21 71.12 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 29.21 71.12 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"+3.3V\""
-			(at 29.21 71.12 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "d97903ae-9c34-4a48-95ba-4a5ee915c47e")
-		)
-		(instances
-			(project "v0.2.1"
-				(path "/f5ecb7fa-5db2-4074-ab55-2fe6f1a25df0"
-					(reference "#PWR037")
 					(unit 1)
 				)
 			)
@@ -10243,7 +10176,7 @@
 	)
 	(symbol
 		(lib_id "Device:R_Small")
-		(at 121.92 177.8 270)
+		(at 121.92 170.18 270)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -10252,7 +10185,7 @@
 		(fields_autoplaced yes)
 		(uuid "9dfecf78-d989-49f6-baf7-044a41d7a67a")
 		(property "Reference" "R9"
-			(at 121.92 172.72 90)
+			(at 121.92 165.1 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10260,7 +10193,7 @@
 			)
 		)
 		(property "Value" "R_Small"
-			(at 121.92 175.26 90)
+			(at 121.92 167.64 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10268,7 +10201,7 @@
 			)
 		)
 		(property "Footprint" "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal"
-			(at 121.92 177.8 0)
+			(at 121.92 170.18 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10277,7 +10210,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 121.92 177.8 0)
+			(at 121.92 170.18 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10286,7 +10219,7 @@
 			)
 		)
 		(property "Description" "Resistor, small symbol"
-			(at 121.92 177.8 0)
+			(at 121.92 170.18 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11227,7 +11160,7 @@
 	)
 	(symbol
 		(lib_id "Isolator:PC817")
-		(at 191.77 27.94 0)
+		(at 191.77 45.72 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -11236,7 +11169,7 @@
 		(fields_autoplaced yes)
 		(uuid "cac37322-236b-4584-8651-f23c57836160")
 		(property "Reference" "U3"
-			(at 191.77 19.05 0)
+			(at 191.77 36.83 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11244,7 +11177,7 @@
 			)
 		)
 		(property "Value" "PC817"
-			(at 191.77 21.59 0)
+			(at 191.77 39.37 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11252,7 +11185,7 @@
 			)
 		)
 		(property "Footprint" "Package_DIP:DIP-4_W7.62mm"
-			(at 186.69 33.02 0)
+			(at 186.69 50.8 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11263,7 +11196,7 @@
 			)
 		)
 		(property "Datasheet" "http://www.soselectronic.cz/a_info/resource/d/pc817.pdf"
-			(at 191.77 27.94 0)
+			(at 191.77 45.72 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11273,7 +11206,7 @@
 			)
 		)
 		(property "Description" "DC Optocoupler, Vce 35V, CTR 50-300%, DIP-4"
-			(at 191.77 27.94 0)
+			(at 191.77 45.72 0)
 			(effects
 				(font
 					(size 1.27 1.27)
