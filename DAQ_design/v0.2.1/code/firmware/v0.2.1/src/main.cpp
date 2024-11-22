@@ -3,15 +3,13 @@
 #include <Wire.h>
 #include <SPI.h>
 #include <Adafruit_ADS1X15.h>
+#include "xparameters.h"
 
 using namespace TeensyTimerTool;
 Adafruit_ADS1115 ads;
 OneShotTimer timer1;
 OneShotTimer adcTimer;
 
-const int in1 = 0;
-const int in2 = 1;
-const int en = 2;
 int frequency = 500;                       // in Hz
 bool toggleState = false;
 int period = 1000 / frequency;            // period in milliseconds
@@ -23,29 +21,26 @@ char buffer[64];
 char resistance_str[16];
 
 const unsigned long SamplePeriod = 1000;  // sampling period in milliseconds
-const uint8_t dataPin = 3;   // connected to 74HC165 QH (9) pin
-const uint8_t latchPin = 4;  // connected to 74HC165 SH/LD (1) pin
-const uint8_t clockPin = 5;  // connected to 74HC165 CLK (2) pin
 
 void setup() {
   Serial.begin(9600);
   
-  pinMode(latchPin, OUTPUT);
-  pinMode(clockPin, OUTPUT);
-  pinMode(dataPin, INPUT);
+  pinMode(LATCH_PIN, OUTPUT);
+  pinMode(CLOCK_PIN, OUTPUT);
+  pinMode(DATA_PIN, INPUT);
 }
 
 uint8_t readDIPSwitches() {
-  digitalWrite(latchPin, LOW);  // Pulse the latch pin to load the parallel data
+  digitalWrite(LATCH_PIN, LOW);  // Pulse the latch pin to load the parallel data
   delayMicroseconds(5);
-  digitalWrite(latchPin, HIGH);
+  digitalWrite(LATCH_PIN, HIGH);
   
   uint8_t switchState = 0;
   for (int i = 0; i < 8; i++) {
-    switchState |= (digitalRead(dataPin) << i); // Read each bit
-    digitalWrite(clockPin, HIGH); // Pulse the clock to shift the next bit
+    switchState |= (digitalRead(DATA_PIN) << i); // Read each bit
+    digitalWrite(CLOCK_PIN, HIGH); // Pulse the clock to shift the next bit
     delayMicroseconds(5);
-    digitalWrite(clockPin, LOW);
+    digitalWrite(CLOCK_PIN, LOW);
   }
   
   return switchState;
@@ -116,17 +111,17 @@ void loop() {
 //     // }
 //     // Serial.println("Good Init ADC");
     
-//     pinMode(in1, OUTPUT);
-//     pinMode(in2, OUTPUT);
-//     pinMode(en, OUTPUT);
-//     digitalWrite(in1, LOW); // nor gates
-//     digitalWrite(in2, LOW); // nor gates
+//     pinMode(IN1, OUTPUT);
+//     pinMode(IN2, OUTPUT);
+//     pinMode(EN, OUTPUT);
+//     digitalWrite(IN1, LOW); // nor gates
+//     digitalWrite(IN2, LOW); // nor gates
 
 //     // init timers with the callback functions
 //     timer1.begin(togglePins);
 //     adcTimer.begin(readADC);
     
-//     digitalWrite(en, HIGH);
+//     digitalWrite(EN, HIGH);
 //     timer1.trigger(halfPeriod * 1000);    // start main timer
 
 //     while(1){;;}
