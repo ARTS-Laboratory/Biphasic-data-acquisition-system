@@ -1,11 +1,6 @@
-Digikey,,,
-,,,
-,Desc.,Count,Link
-,boost converter,x1,https://www.digikey.com/en/products/detail/sparkfun-electronics/PRT-10255/5673741?s=N4IgTCBcDaIDIEsAKB7A7gUwE4gLoF8g
-,Optocoupler,x4,https://www.digikey.com/en/products/detail/onsemi/FOD817A300W/1049597?s=N4IgTCBcDaIGIHkAiAOAjAdgIIGYAMeA6gLQBySIAugL5A
-,dip connectors,x10,https://www.digikey.com/en/products/detail/te-connectivity-amp-connectors/1-2199298-4/5022041?s=N4IgTCBcDaIIIEYwAYDMAWAnAWgHIBEQBdAXyA
-,V-dip-switches 10 ch.,x4,https://www.digikey.com/en/products/detail/cui-devices/DS03-254-10BE/11310908?s=N4IgTCBcDa5mBmAtAEQMoAZlgKwBYkBGDAIQFEkA5FEAXQF8g
-,Shift-reg,x4,https://www.digikey.com/en/products/detail/texas-instruments/SN74HC165N/376966
-,ADC,x2,https://www.digikey.com/en/products/detail/texas-instruments/ADS1115BQDGSRQ1/6575621
-,connector male,x1,https://www.digikey.com/en/products/detail/phoenix-contact/1778001/349031?s=N4IgTCBcDa4OxwLQFY4EYkDkAiIC6AvkA
-,connector female,x1,https://www.digikey.com/en/products/detail/phoenix-contact/1776524/349002
+0805 Resistor Book,https://www.adafruit.com/product/441
+DIP Switch SR,https://www.digikey.com/en/products/detail/texas-instruments/SN74HC165N/376966
+5.6V Zener Diode,https://www.digikey.com/en/products/detail/taiwan-semiconductor-corporation/BZS55C5V6-RAG/7371926
+SMD LED Red,https://www.digikey.com/en/products/detail/w%C3%BCrth-elektronik/150120SS75000/4489942
+SMD LED Green,https://www.digikey.com/en/products/detail/w%C3%BCrth-elektronik/150120GS75000/4489936
+Battery Connector,https://www.digikey.com/en/products/detail/jst-sales-america-inc/SM02B-GHS-TB/807786
