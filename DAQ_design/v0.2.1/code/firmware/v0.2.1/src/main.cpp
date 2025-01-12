@@ -77,15 +77,6 @@ void loop() {
 //     timer1.trigger(halfPeriod * 1000);    // restart the main timer for the next toggle
 // }
 
-
-
-// float bigR(float drop, float sense, float in_l)
-// {
-//     float i_calculated = (drop * multiplier) / in_l;
-//     float R = (sense * multiplier) / i_calculated;
-//     return R;
-// }
-
 // void readADC() 
 // {
 // //   int16_t val_drop = ads.readADC_Differential_2_3();  

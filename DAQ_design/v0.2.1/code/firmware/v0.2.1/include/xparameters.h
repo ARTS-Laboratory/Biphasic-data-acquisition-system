@@ -4,3 +4,12 @@
 #define DATA_PIN 23
 #define LATCH_PIN 18
 #define CLOCK_PIN 19
+
+
+float bigR(float drop, float sense, float in_l)
+{
+    float i_calculated = (drop * multiplier) / in_l;
+    float R = (sense * multiplier) / i_calculated;
+    return R;
+}
+
