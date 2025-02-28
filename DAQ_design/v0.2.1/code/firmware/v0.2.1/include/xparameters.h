@@ -8,8 +8,9 @@
 
 float bigR(float drop, float sense, float in_l)
 {
-    float i_calculated = (drop * multiplier) / in_l;
-    float R = (sense * multiplier) / i_calculated;
+    // float i_calculated = (drop * multiplier) / in_l;
+    float i_calculated = (drop * 0.1875f) / in_l;
+    float R = (sense * 0.1875f) / i_calculated;
     return R;
 }
 
