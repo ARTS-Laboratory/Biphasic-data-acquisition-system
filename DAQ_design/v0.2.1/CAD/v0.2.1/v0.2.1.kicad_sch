@@ -8145,7 +8145,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "1899003:PHOENIX_1899003"
+		(property "Footprint" "4-pos-terminal:PHOENIX_1899003"
 			(at 154.94 175.26 0)
 			(effects
 				(font
