@@ -40,3 +40,10 @@ in bibtex
   groups       = {{ARTS-L}ab},  
   url          = {https://github.com/ARTS-Laboratory/Biphasic-data-acquisition-system},  
 }
+
+<p align="center">
+<img src="media/QR-code.png" alt="drawing" width="200"/>
+</p>
+<p align="center">
+QR code for repo.
+</p>
