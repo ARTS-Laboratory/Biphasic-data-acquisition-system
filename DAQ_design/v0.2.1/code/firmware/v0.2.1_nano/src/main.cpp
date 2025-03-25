@@ -10,9 +10,9 @@
 Adafruit_ADS1115 ads;
 
 unsigned long start_time = 0;
-float userfrq = 1;
-float period = 1;
-float in_line = 1;
+float userfrq = 10.0f;
+float period = 1.0f;
+float in_line = 10000.0f;
 const float multiplier = 0.1875F;         // For 16 bit dac @ +/-6.144V gain
 volatile bool toggle_flag = false;        // ISR flag
 bool L_state = false;                     // Logic flag
@@ -22,6 +22,19 @@ unsigned long high_state_duration = 0;
 char buffer[64]; 
 char resistance_str[16];
 int signalType = 0;                       // 0 for biphasic, 1 for pure DC
+
+int16_t val_drop; 
+int16_t adc2;
+int16_t adc3;
+float sense1;
+float sense2;
+float r1;
+float r2;
+char r1_str[10];
+char r2_str[10];
+char s1_str[10];
+char s2_str[10];
+
 
 void toggleHbridge()
 {
@@ -55,27 +68,37 @@ void toggleHbridge()
 float bigR(float drop, float sense, float in_l)
 {
   float i_calculated = (drop * multiplier) / in_l;
-  float R = (sense * multiplier) / i_calculated;
+  float R = sense / i_calculated;
   return R;
 }
 
 void readADC() 
 {
-  if (start_time == 0) 
-  {                         // Check if start time hasn't been initialized
+  if (start_time == 0) {   // Check if start time hasn't been initialized
     start_time = millis(); // Record the time when LOGIC1 goes high for the first time
   }
 
-  int16_t val_drop = ads.readADC_Differential_2_3();  
-  int16_t val_sense = ads.readADC_Differential_0_1();
+  val_drop = ads.readADC_Differential_0_1();  
+  
+  adc2 = ads.readADC_SingleEnded(2);
+  adc3 = ads.readADC_SingleEnded(3);
+  sense1 = ads.computeVolts(adc2);
+  sense2 = ads.computeVolts(adc3);
 
-  float r = bigR(val_drop, val_sense, in_line);
+  r1 = bigR(val_drop, sense1, in_line);
+  r2 = bigR(val_drop, sense2, in_line);
+  
   unsigned long elapsed_time = millis() - start_time;
-
-  dtostrf(r, 6, 3, resistance_str);
-  snprintf(buffer, sizeof(buffer), "%lu,%s", elapsed_time, resistance_str);
+  
+  dtostrf(r1, 6, 3, r1_str);
+  dtostrf(r2, 6, 3, r2_str);
+  dtostrf(sense1, 6, 3, s1_str);
+  dtostrf(sense2, 6, 3, s2_str);
+  
+  snprintf(buffer, sizeof(buffer), "%lu,%s,%s,%s,%s", elapsed_time, r1_str, r2_str, s1_str, s2_str);
   Serial.println(buffer);
 }
+
 
 void setup() 
 {
@@ -95,28 +118,21 @@ void setup()
   }
   Serial.println("Good Init");
 
-  Serial.println("Enter signal type (0 for biphasic, 1 for pure DC):");
-  while (!Serial.available());
+  // Serial.println("Enter signal type (0 for biphasic, 1 for pure DC):");
+  // while (!Serial.available());
 
-  signalType = Serial.parseInt();
-  Serial.print("Signal type set to: ");
-  Serial.println(signalType == 0 ? "Biphasic" : "Pure DC");
+  // signalType = Serial.parseInt();
+  // Serial.print("Signal type set to: ");
+  // Serial.println(signalType == 0 ? "Biphasic" : "Pure DC");
 
-  Serial.println("Enter frequency in Hz (1, 2, 5, 10, 20):");
-  while (!Serial.available());
+  // Serial.println("Enter frequency in Hz (1, 2, 5, 10, 20):");
+  // while (!Serial.available());
 
-  userfrq = Serial.parseFloat();
-  Serial.print("Frequency set to: ");
-  Serial.println(userfrq);
+  // userfrq = Serial.parseFloat();
+  // Serial.print("Frequency set to: ");
+  // Serial.println(userfrq);
   userfrq = (2 * userfrq);
   period = (1.0 / userfrq);
-
-  Serial.println("Enter in-line resistor value: ");
-  while (!Serial.available());
-
-  in_line = Serial.parseFloat(); 
-  Serial.print("In-line resistance set to: ");
-  Serial.println(in_line);
 
   // Init timer1
   noInterrupts();   // disables global interrupts
@@ -174,7 +190,7 @@ void loop()
   }
 
   // Check if H-bridge is high and ~80% through its duty cycle
-  if (!readchk && L_state && (micros() - high_state_start_time >= 0.8 * high_state_duration)) 
+  if (!readchk && L_state && (micros() - high_state_start_time >= 0.75 * high_state_duration)) 
   {
     readADC();
     readchk = true;
