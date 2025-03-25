@@ -1,12 +1,14 @@
 #include "Arduino.h"
 #include "TeensyTimerTool.h"
 #include <Wire.h>
+#include <SD.h>
 #include <SPI.h>
 #include <Adafruit_ADS1X15.h>
 
 #define IN1 14
 #define IN2 15
 #define EN 2
+#define SD_CS 10
 #define LEDPOW 3
 #define LEDACT 4
 #define DATA_PIN 23

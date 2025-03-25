@@ -10,7 +10,7 @@ bool toggleState = false;
 int period = 1000 / frequency;            /* period in milliseconds */
 int halfPeriod = period / 2;              /* half period for 50% duty cycle */
 int adcDelay = halfPeriod * 0.8;          /* 80% of half period */
-float in_line = 220000;                   /* value of known resistor */
+float in_line = 180000;                   /* value of known resistor */
 const float multiplier = 0.1875F;         /* for 16 bit dac @ +/-6.144V gain */
 char buffer[64]; 
 char resistance_str[16];
@@ -21,6 +21,7 @@ int16_t val_sense;
 float r;
 char r_str[10];
 char s_str[10];
+char d_str[10];
 
 void readDIPSwitches(uint8_t& switchState) {
   digitalWrite(LATCH_PIN, LOW);  /* Pulse the latch pin to load the parallel data */
@@ -64,10 +65,17 @@ void readADC()
   
   dtostrf(r, 6, 3, r_str);
   dtostrf(val_sense, 6, 3, s_str);
+  dtostrf(val_drop, 6, 3, d_str);
   
-  snprintf(buffer, sizeof(buffer), "%s,%s", r_str, s_str);
-  Serial.println(buffer);
-  digitalWrite(LEDACT, LOW);
+  snprintf(buffer, sizeof(buffer), "%s,%s,%s", r_str, s_str, d_str);
+  File dataFile = SD.open("data.txt", FILE_WRITE);
+  if (dataFile) {
+    dataFile.println(buffer);
+    dataFile.close();
+    digitalWrite(LEDACT, LOW);
+  } else {
+    Serial.println("Error opening data.txt");
+  }
 }
 
 int main() 
@@ -87,7 +95,7 @@ int main()
   pinMode(CLOCK_PIN, OUTPUT);
   pinMode(DATA_PIN, INPUT);
 
-  ads.setGain(GAIN_TWOTHIRDS);          /* +/- 6.144V range */
+  ads.setGain(GAIN_ONE);          /* +/- 4.096V range */
 
   if (!ads.begin()) 
   {
@@ -95,6 +103,12 @@ int main()
       while (1);
   }
   Serial.println("Good Init ADC");
+
+  if (!SD.begin(SD_CS)) {
+      Serial.println("SD card initialization failed!");
+      while (1);
+  }
+  Serial.println("SD card initialized.");
   
   readDIPSwitches(switchState);
   Serial.print("Raw switchState: ");
