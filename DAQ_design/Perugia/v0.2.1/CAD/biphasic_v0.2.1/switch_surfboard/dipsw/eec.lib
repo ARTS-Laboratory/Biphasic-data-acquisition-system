@@ -1,0 +1,60 @@
+EESchema-LIBRARY Version 2.4
+#encoding utf-8
+#
+# TE Connectivity 3-5435640-6
+#
+DEF 3-5435640-6 SW 0 40 Y Y 5 L N
+F0 "SW" 0 200 50 H V L CNN 
+F1 "3-5435640-6" 0 300 50 H V L CNN 
+F2 "TE_Connectivity-3-5435640-6-*" 0 400 50 H I L CNN 
+F3 "https://www.te.com/commerce/DocumentDelivery/DDEController?Action=showdoc&DocId=Customer+Drawing%7F5435640%7FC%7Fpdf%7FEnglish%7FENG_CD_5435640_C.pdf%7F3-5435640-6" 0 500 50 H I L CNN 
+F4 "No" 0 600 50 H I L CNN "automotive"
+F5 "Switch" 0 700 50 H I L CNN "category"
+F6 "1A" 0 800 50 H I L CNN "contact current rating"
+F7 "Electromechanical" 0 900 50 H I L CNN "device class L1"
+F8 "Switches" 0 1000 50 H I L CNN "device class L2"
+F9 "DIP Switches" 0 1100 50 H I L CNN "device class L3"
+F10 "SWITCH ROCKER DIP SPST 60MA 5V" 0 1200 50 H I L CNN "digikey description"
+F11 "450-1405-ND" 0 1300 50 H I L CNN "digikey part number"
+F12 "0.36inch" 0 1400 50 H I L CNN "height"
+F13 "Yes" 0 1500 50 H I L CNN "lead free"
+F14 "65c03b3093fc8cf9" 0 1600 50 H I L CNN "library id"
+F15 "TE Connectivity" 0 1700 50 H I L CNN "manufacturer"
+F16 "Through Hole" 0 1800 50 H I L CNN "mount"
+F17 "DIP Switches / SIP Switches 5 POS TOP RCKR SLD" 0 1900 50 H I L CNN "mouser description"
+F18 "571-354356406" 0 2000 50 H I L CNN "mouser part number"
+F19 "5" 0 2100 50 H I L CNN "number of circuits"
+F20 "PTH_SW_0IN38_0IN58" 0 2200 50 H I L CNN "package"
+F21 "Yes" 0 2300 50 H I L CNN "rohs"
+F22 "SPST-NO" 0 2400 50 H I L CNN "throw configuration"
+F23 "40V" 0 2500 50 H I L CNN "voltage rating DC"
+DRAW
+X 1 1 100 0 100 R 40 0 1 1 P 
+X 10 10 500 0 100 L 40 0 1 1 P 
+C 230 0 20 1 1 0 N
+C 370 0 20 1 1 0 N
+P 2 1 1 0 250 10 350 70 N
+X 2 2 100 0 100 R 40 0 2 1 P 
+X 9 9 500 0 100 L 40 0 2 1 P 
+C 230 0 20 2 1 0 N
+C 370 0 20 2 1 0 N
+P 2 2 1 0 250 10 350 70 N
+X 3 3 100 0 100 R 40 0 3 1 P 
+X 8 8 500 0 100 L 40 0 3 1 P 
+C 230 0 20 3 1 0 N
+C 370 0 20 3 1 0 N
+P 2 3 1 0 250 10 350 70 N
+X 4 4 100 0 100 R 40 0 4 1 P 
+X 7 7 500 0 100 L 40 0 4 1 P 
+C 230 0 20 4 1 0 N
+C 370 0 20 4 1 0 N
+P 2 4 1 0 250 10 350 70 N
+X 5 5 100 0 100 R 40 0 5 1 P 
+X 6 6 500 0 100 L 40 0 5 1 P 
+C 230 0 20 5 1 0 N
+C 370 0 20 5 1 0 N
+P 2 5 1 0 250 10 350 70 N
+ENDDRAW
+ENDDEF
+#
+# End Library

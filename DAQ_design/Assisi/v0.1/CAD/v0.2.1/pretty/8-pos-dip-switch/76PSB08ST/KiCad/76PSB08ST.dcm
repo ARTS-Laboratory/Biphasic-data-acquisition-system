@@ -1,0 +1,9 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP 76PSB08ST
+D Switch DIP,SPST,8w,piano act,PC Pins
+K
+F https://datasheet.datasheetarchive.com/originals/distributors/Datasheets-12/DSA-239017.pdf
+$ENDCMP
+#
+#End Doc Library
