@@ -33,8 +33,8 @@ David Wamai, Hasan Borke Birgin, Austin Downey, and Joud Satme. Biphasic data ac
  
 in bibtex
 
-@Misc{Wamai2023BiphasicDataAcquisition,   
-  author       = {David Wamai and Hasan Borke Birgin and Austin Downey and Joud Satme},   
+@Misc{ARTSLabBiphasicDataAcquisition,   
+  author       = {ARTS-Lab},  
   howpublished = {GitHub},  
   title        = {Biphasic Data Acquisition System},   
   groups       = {{ARTS-L}ab},  
