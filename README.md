@@ -39,7 +39,7 @@ in bibtex
   title        = {Biphasic Data Acquisition System},   
   groups       = {{ARTS-L}ab},  
   url          = {https://github.com/ARTS-Laboratory/Biphasic-data-acquisition-system},  
-  notes  = {Accessed: Month dd, yyyy},   
+  note  = {Accessed: Month dd, yyyy},   
 }
 
 <p align="center">
