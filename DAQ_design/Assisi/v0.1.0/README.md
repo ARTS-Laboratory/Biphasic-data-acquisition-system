@@ -1,4 +1,4 @@
-# Assisi V0.1
+# Assisi V0.1.0
 
 *This is copy and paste version Perugia 0.2.1, it looks like the CAD file we want is in v0.2.1\CAD\biphasic_v0.2.1\biphasic_resized
 
