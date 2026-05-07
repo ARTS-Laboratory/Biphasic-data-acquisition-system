@@ -5102,7 +5102,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "MountingHole:MountingHole_4.3mm_M4_Pad"
+		(property "Footprint" ""
 			(at 58.42 97.79 0)
 			(effects
 				(font
@@ -5169,7 +5169,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "MountingHole:MountingHole_4.3mm_M4_Pad"
+		(property "Footprint" ""
 			(at 58.42 105.41 0)
 			(effects
 				(font
@@ -5658,7 +5658,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "MountingHole:MountingHole_4.3mm_M4_Pad"
+		(property "Footprint" ""
 			(at 58.42 113.03 0)
 			(effects
 				(font
