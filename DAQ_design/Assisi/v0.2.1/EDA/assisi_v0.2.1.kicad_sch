@@ -5102,7 +5102,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "MountingHole:MountingHole_4.3mm_M4_Pad"
+		(property "Footprint" "MountingHole:MountingHole_4.3mm_M4"
 			(at 58.42 97.79 0)
 			(effects
 				(font
@@ -5169,7 +5169,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "MountingHole:MountingHole_4.3mm_M4_Pad"
+		(property "Footprint" "MountingHole:MountingHole_4.3mm_M4"
 			(at 58.42 105.41 0)
 			(effects
 				(font
@@ -5502,71 +5502,6 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 58.42 115.57 270)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "80d32f9a-71d3-4f57-a6a7-d699554ea0fb")
-		(property "Reference" "#PWR017"
-			(at 52.07 115.57 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "GND"
-			(at 54.0258 115.697 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 58.42 115.57 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 58.42 115.57 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 58.42 115.57 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "781d5a43-cbc4-4e55-bba4-71e46d90c1ff")
-		)
-		(instances
-			(project "assisi_v0.2.1"
-				(path "/52f50ad4-ebe6-41ec-9989-47b12e2d2ded"
-					(reference "#PWR017")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:GND")
 		(at 162.56 143.51 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -5658,7 +5593,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "MountingHole:MountingHole_4.3mm_M4_Pad"
+		(property "Footprint" "MountingHole:MountingHole_4.3mm_M4"
 			(at 58.42 113.03 0)
 			(effects
 				(font
@@ -6121,136 +6056,6 @@
 			(project "biphasic_resized"
 				(path "/52f50ad4-ebe6-41ec-9989-47b12e2d2ded"
 					(reference "Q6")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:GND")
-		(at 58.42 107.95 270)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "aa3612cb-ce99-4961-91a2-55858c2fb699")
-		(property "Reference" "#PWR016"
-			(at 52.07 107.95 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "GND"
-			(at 54.0258 108.077 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 58.42 107.95 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 58.42 107.95 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 58.42 107.95 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "10bec9f9-0e77-4994-8e61-9473dcbf2358")
-		)
-		(instances
-			(project "assisi_v0.2.1"
-				(path "/52f50ad4-ebe6-41ec-9989-47b12e2d2ded"
-					(reference "#PWR016")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:GND")
-		(at 58.42 100.33 270)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "ab7f4aee-8358-4e52-886d-d82a401a06fb")
-		(property "Reference" "#PWR015"
-			(at 52.07 100.33 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "GND"
-			(at 54.0258 100.457 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 58.42 100.33 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 58.42 100.33 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 58.42 100.33 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "87ae1f6b-220e-4d89-9ba6-46e2dee77a5f")
-		)
-		(instances
-			(project "assisi_v0.2.1"
-				(path "/52f50ad4-ebe6-41ec-9989-47b12e2d2ded"
-					(reference "#PWR015")
 					(unit 1)
 				)
 			)
