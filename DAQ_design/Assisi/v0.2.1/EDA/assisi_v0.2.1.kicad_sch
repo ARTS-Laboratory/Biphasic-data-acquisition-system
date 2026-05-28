@@ -3847,6 +3847,16 @@
 	)
 	(wire
 		(pts
+			(xy 198.12 101.6) (xy 213.36 101.6)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6ab8cce8-7fec-43aa-8951-d0a1c5d49086")
+	)
+	(wire
+		(pts
 			(xy 158.75 33.02) (xy 172.72 33.02)
 		)
 		(stroke
@@ -3864,16 +3874,6 @@
 			(type default)
 		)
 		(uuid "773d89cb-07ba-4596-bc5a-62a349925d70")
-	)
-	(wire
-		(pts
-			(xy 203.2 88.9) (xy 213.36 88.9)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "7b7b11e2-96fb-4c8c-ad33-ae08d8d3a3b2")
 	)
 	(wire
 		(pts
@@ -3924,6 +3924,16 @@
 			(type default)
 		)
 		(uuid "ab98edf4-8dd1-456d-a54e-399299c6e937")
+	)
+	(wire
+		(pts
+			(xy 203.2 99.06) (xy 213.36 99.06)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "acc284a7-20d1-4242-b893-1d391322e664")
 	)
 	(wire
 		(pts
@@ -3997,7 +4007,7 @@
 	)
 	(wire
 		(pts
-			(xy 52.07 135.89) (xy 102.87 135.89)
+			(xy 96.52 135.89) (xy 102.87 135.89)
 		)
 		(stroke
 			(width 0)
@@ -4044,6 +4054,16 @@
 			(type default)
 		)
 		(uuid "e4f2289e-2637-468e-a814-602a1d58a84f")
+	)
+	(wire
+		(pts
+			(xy 203.2 93.98) (xy 213.36 93.98)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f3dcfea2-0471-4bfb-b92f-51b999a0fd4e")
 	)
 	(global_label "AIN0"
 		(shape input)
@@ -4188,6 +4208,26 @@
 			)
 		)
 	)
+	(global_label "SYNC_PIN"
+		(shape input)
+		(at 198.12 101.6 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "35d78622-8d3b-4c46-aafc-fa668d4a2274")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 198.12 101.6 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+	)
 	(global_label "LOGIC2"
 		(shape input)
 		(at 120.65 68.58 180)
@@ -4264,6 +4304,28 @@
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "SYNC_PIN"
+		(shape input)
+		(at 149.86 110.49 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "a2e9eaf4-3363-444f-8f17-94e9595e1c4b")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 137.8033 110.49 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
 				(hide yes)
 			)
 		)
@@ -4724,6 +4786,71 @@
 		)
 	)
 	(symbol
+		(lib_id "power:GND")
+		(at 203.2 99.06 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "25e6a23f-2052-434f-ad44-fc598f97714f")
+		(property "Reference" "#PWR015"
+			(at 196.85 99.06 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 198.8058 99.187 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 203.2 99.06 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 203.2 99.06 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 203.2 99.06 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "4ebb62fc-b9e4-4788-8fb7-2475d841f9aa")
+		)
+		(instances
+			(project "assisi_v0.2.1"
+				(path "/52f50ad4-ebe6-41ec-9989-47b12e2d2ded"
+					(reference "#PWR015")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Transistor_FET:IRF540N")
 		(at 125.73 68.58 0)
 		(unit 1)
@@ -4800,7 +4927,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 52.07 135.89 270)
+		(at 96.52 135.89 270)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -4808,7 +4935,7 @@
 		(dnp no)
 		(uuid "32435b64-6445-4cd2-b5d8-a747aab94a1e")
 		(property "Reference" "#PWR01"
-			(at 45.72 135.89 0)
+			(at 90.17 135.89 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4817,7 +4944,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 47.6758 136.017 0)
+			(at 92.1258 136.017 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4825,7 +4952,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 52.07 135.89 0)
+			(at 96.52 135.89 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4834,7 +4961,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 52.07 135.89 0)
+			(at 96.52 135.89 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4843,7 +4970,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 52.07 135.89 0)
+			(at 96.52 135.89 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6553,7 +6680,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 203.2 88.9 270)
+		(at 203.2 93.98 270)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -6561,7 +6688,7 @@
 		(dnp no)
 		(uuid "eea33847-2e59-4cab-9db7-abd2b356f69e")
 		(property "Reference" "#PWR014"
-			(at 196.85 88.9 0)
+			(at 196.85 93.98 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6570,7 +6697,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 198.8058 89.027 0)
+			(at 198.8058 94.107 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6578,7 +6705,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 203.2 88.9 0)
+			(at 203.2 93.98 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6587,7 +6714,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 203.2 88.9 0)
+			(at 203.2 93.98 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6596,7 +6723,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 203.2 88.9 0)
+			(at 203.2 93.98 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6608,7 +6735,7 @@
 			(uuid "5f256c3e-6b84-4405-ab89-2706a7f767b0")
 		)
 		(instances
-			(project "assisi_v0.2.0"
+			(project "assisi_v0.2.1"
 				(path "/52f50ad4-ebe6-41ec-9989-47b12e2d2ded"
 					(reference "#PWR014")
 					(unit 1)
