@@ -1,7 +1,7 @@
 #include <Arduino.h>
 
-#define LOGIC1 12 
-#define LOGIC2 11
+#define LOGIC1 9 
+#define LOGIC2 8
 #define SYNC_PIN 7 // optional marker to NI side
 
 unsigned long start_time = 0;
@@ -28,12 +28,23 @@ void setup(){
   digitalWrite(LOGIC2, LOW);
   digitalWrite(SYNC_PIN, LOW);
 
-  Serial.println("Enter frequency in Hz (1, 2, 5, 10, 20, 50, 100):");
-  while (!Serial.available());
+  //Serial.println("Enter frequency in Hz (1, 2, 5, 10, 20, 50, 100):");
+  //while (!Serial.available());
 
-  userfrq = Serial.parseFloat(); // Read requested period from user input
-  Serial.print("frequency set to: ");
-  Serial.println(userfrq);
+//  userfrq = Serial.parseFloat(); // Read requested period from user input
+//  Serial.print("frequency set to: ");
+//  Serial.println(userfrq);
+
+float userfrq = 1.0; // presetting freq so i dont have to plug in usb
+
+unsigned long start = millis();
+
+while (!Serial.available() && millis() - start < 3000) {
+}
+
+if (Serial.available()) {
+    userfrq = Serial.parseFloat();
+}
 
   // half-period in ms for each h-bridge state
   high_state_duration = (unsigned long)(500000.0 / userfrq);
@@ -95,7 +106,7 @@ void loop() {
   }
 
   if (!readchk && L_state &&
-      (micros() - high_state_start_time >= (unsigned long)(0.8 * high_state_duration)) {
+      (micros() - high_state_start_time >= (unsigned long)(0.8 * high_state_duration))) {
 
     // optional sync pulse for NI acquisition
     digitalWrite(SYNC_PIN, HIGH);
