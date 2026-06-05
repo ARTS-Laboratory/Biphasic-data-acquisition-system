@@ -5463,7 +5463,7 @@
 		(descr "DC Barrel Jack")
 		(tags "Power Jack")
 		(property "Reference" "VPP"
-			(at -8.45 5.75 90)
+			(at 3 -0.0425 0)
 			(layer "F.SilkS")
 			(uuid "c6e245db-65ca-4db6-a278-21533fb37179")
 			(effects
