@@ -9,8 +9,8 @@ FILE_DESCRIPTION(
 /* implementation_level */ '2;1');
 
 FILE_NAME(
-/* name */ 'cDAQ_Lid.stp',
-/* time_stamp */ '2026-06-17T12:24:03-04:00',
+/* name */ 'cDAQ_Box_Lid_v0.2.stp',
+/* time_stamp */ '2026-06-17T12:25:47-04:00',
 /* author */ ('giese'),
 /* organization */ (''),
 /* preprocessor_version */ 'ST-DEVELOPER v20.1',
@@ -19685,15 +19685,17 @@ SOLID_ANGLE_UNIT()
 #16979=PRODUCT_DEFINITION_SHAPE('',$,#16982);
 #16980=SHAPE_REPRESENTATION('',(#9168),#16968);
 #16981=PRODUCT_DEFINITION_CONTEXT('part definition',#16986,'design');
-#16982=PRODUCT_DEFINITION('cDAQ_Lid_Box','cDAQ_Lid_Box',#16983,#16981);
+#16982=PRODUCT_DEFINITION('cDAQ_Box_Lid_v0.2','cDAQ_Box_Lid_v0.2',#16983,
+#16981);
 #16983=PRODUCT_DEFINITION_FORMATION('',$,#16988);
-#16984=PRODUCT_RELATED_PRODUCT_CATEGORY('cDAQ_Lid_Box','cDAQ_Lid_Box',(#16988));
+#16984=PRODUCT_RELATED_PRODUCT_CATEGORY('cDAQ_Box_Lid_v0.2',
+'cDAQ_Box_Lid_v0.2',(#16988));
 #16985=APPLICATION_PROTOCOL_DEFINITION('international standard',
 'automotive_design',2009,#16986);
 #16986=APPLICATION_CONTEXT(
 'Core Data for Automotive Mechanical Design Process');
 #16987=PRODUCT_CONTEXT('part definition',#16986,'mechanical');
-#16988=PRODUCT('cDAQ_Lid_Box','cDAQ_Lid_Box',$,(#16987));
+#16988=PRODUCT('cDAQ_Box_Lid_v0.2','cDAQ_Box_Lid_v0.2',$,(#16987));
 #16989=PRESENTATION_STYLE_ASSIGNMENT((#16991));
 #16990=PRESENTATION_STYLE_ASSIGNMENT((#16992));
 #16991=SURFACE_STYLE_USAGE(.BOTH.,#16997);
