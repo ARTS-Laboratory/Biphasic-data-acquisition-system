@@ -2,7 +2,7 @@
 
 #define LOGIC1 9 
 #define LOGIC2 8
-#define SYNC_PIN 7 // optional marker to NI side
+#define SYNC_PIN 4 // optional marker to NI side
 
 unsigned long start_time = 0;
 float userfrq = 1;
