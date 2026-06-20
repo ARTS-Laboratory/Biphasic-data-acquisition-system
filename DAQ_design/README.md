@@ -11,7 +11,7 @@ Hardware design and code for the DAQ system. Hardware variations are named after
 
 
 ## Assisi
-* Biphasic DAQ with ADC done cDAQ hardware
+* Biphasic DAQ with ADC done using cDAQ hardware
 
 <p align="center">
 <img src="../media/Assisi.png" alt="drawing" width="700"/>
