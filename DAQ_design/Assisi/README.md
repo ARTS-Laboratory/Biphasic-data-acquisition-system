@@ -15,7 +15,7 @@
 
 ## V0.2.2
 * Shortened the PCB and added a notch/cutout for better enclosure fit.
-* Cleaned up the schematic, PCB traces, and moved toward two mounting holes.
+* Cleaned up the schematic, PCB traces, and moved to two mounting holes.
 
 ## V0.2.3
 * Future version to explore direct 5 V power input without the Arduino regulator.
