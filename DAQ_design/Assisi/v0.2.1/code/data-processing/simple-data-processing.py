@@ -39,6 +39,7 @@ cc = plt.rcParams['axes.prop_cycle'].by_key()['color']
 ## End of plot formatting code
 plt.close('all')
 
+#%% save settings
 TEST_FOLDER = "07152026"
 TEST_FILE = "test_1.lvm"
 
@@ -49,6 +50,7 @@ TEST_NAME = FILENAME.stem
 SAVE_FOLDER = Path(TEST_FOLDER) / "figures"
 SAVE_FOLDER.mkdir(parents=True, exist_ok=True)
 
+#%% data prep
 # Use the filename you already defined
 filename = FILENAME
 
@@ -96,17 +98,32 @@ v4_full = np.concatenate([df[c].to_numpy() for c in v4_cols[:nblocks]])
 v5_full = np.concatenate([df[c].to_numpy() for c in v5_cols[:nblocks]])
 v6_full = np.concatenate([df[c].to_numpy() for c in v6_cols[:nblocks]])
 
+# whole experiment
 plt.figure()
 plt.plot(time_full, v5_full)
 plt.xlabel("time (s)")
 plt.ylabel("voltage (V)")
-plt.title("raw voltage (A2) vs time")
+plt.title("raw curve (A2) vs time")
 plt.tight_layout()
+plt.savefig('A2-vs-T.jpg', dpi=300)
 
+# zoom
+plt.figure()
+plt.plot(time_full, v5_full)
+plt.xlabel("time (s)")
+plt.ylabel("voltage (V)")
+plt.title("raw curve (A2) vs time")
+plt.xlim(20,22)
+plt.ylim(4,5)
+plt.tight_layout()
+plt.savefig('zoom-A2-vs-T.jpg', dpi=300)
+
+#%% core calculations
 Rshunt = 1000000 # in ohms
 
 Vshunt = v4_full - v5_full
 
+# whole experiment
 Vmat = v5_full - v6_full
 plt.figure()
 plt.plot(time_full, Vmat)
@@ -114,9 +131,11 @@ plt.xlabel("time (s)")
 plt.ylabel("voltage (V)")
 plt.title("material voltage vs time")
 plt.tight_layout()
+plt.savefig('Vmat-vs-T.jpg', dpi=300)
 
 I = Vshunt / Rshunt
 
+# whole experiment
 Rmat = Vmat / I
 plt.figure()
 plt.plot(time_full, Rmat)
@@ -125,3 +144,27 @@ plt.ylabel("resistance (ohms)")
 plt.title("resistance vs time")
 plt.xlim(0,120)
 plt.tight_layout()
+
+#%% steady-state Ravg over ALL pulses
+phase = np.mod(time_full, 1.0)
+steady = (phase >= 0.30) & (phase <= 0.80)
+Ravg = np.nanmean(Rmat[steady])
+
+#%% steady-state Ravgs PER pulse
+pulse = np.floor(time_full).astype(int)
+
+pulse_numbers = np.unique(pulse)
+
+Rpulse = []
+
+for p in pulse_numbers:
+    mask = (pulse == p) & (phase >= 0.30) & (phase <= 0.80)
+    Rpulse.append(np.nanmean(Rmat[mask]))
+    
+plt.figure()
+plt.plot(pulse_numbers, Rpulse, 'o-')
+plt.xlabel("pulse number")
+plt.ylabel("average resistance (Ω)")
+plt.title('Ravg per pulse over time')
+plt.tight_layout()
+plt.grid(True)
