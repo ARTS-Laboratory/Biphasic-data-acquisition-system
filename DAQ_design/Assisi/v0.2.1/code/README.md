@@ -9,6 +9,6 @@
 * LabView code collects data (voltage) and saves it to a LVM file.
 * Python code reads LVM file and returns a CSV file of the resistance over time.
 
-## data_processinf_online
+## data_processing_online
 * LabView code collects data (voltage) and converts to resistance data in the program before saving it as a LVM file.
 * In this code, the intermediate voltage signal is never saved.
