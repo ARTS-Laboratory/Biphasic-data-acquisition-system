@@ -90,7 +90,7 @@ time_block = df["X_Value"].to_numpy()
 dt = np.median(np.diff(time_block))
 block_duration = time_block[-1] + dt
 
-# Stitch time and voltage columns
+# Stitch time and voltage columns into continuous
 nblocks = min(len(v4_cols), len(v5_cols), len(v6_cols))
 
 time_full = np.concatenate([time_block + i * block_duration for i in range(nblocks)])
@@ -98,32 +98,36 @@ v4_full = np.concatenate([df[c].to_numpy() for c in v4_cols[:nblocks]])
 v5_full = np.concatenate([df[c].to_numpy() for c in v5_cols[:nblocks]])
 v6_full = np.concatenate([df[c].to_numpy() for c in v6_cols[:nblocks]])
 
-# whole experiment
+# A2 vs T: whole experiment
 plt.figure()
 plt.plot(time_full, v5_full)
 plt.xlabel("time (s)")
 plt.ylabel("voltage (V)")
 plt.title("raw curve (A2) vs time")
 plt.tight_layout()
-plt.savefig('A2-vs-T.jpg', dpi=300)
+plt.savefig(SAVE_FOLDER / f"{TEST_NAME}-A2-vs-T.png",
+            dpi=300,
+            bbox_inches="tight")
 
-# zoom
+# A2 vs T: zoom
 plt.figure()
 plt.plot(time_full, v5_full)
 plt.xlabel("time (s)")
 plt.ylabel("voltage (V)")
-plt.title("raw curve (A2) vs time")
+plt.title("raw curve (A2) vs time (zoom)")
 plt.xlim(20,22)
 plt.ylim(4,5)
 plt.tight_layout()
-plt.savefig('zoom-A2-vs-T.jpg', dpi=300)
+plt.savefig(SAVE_FOLDER / f"{TEST_NAME}-zoom-A2-vs-T.png",
+            dpi=300,
+            bbox_inches="tight")
 
 #%% core calculations
 Rshunt = 1000000 # in ohms
 
 Vshunt = v4_full - v5_full
 
-# whole experiment
+# Vmat vs T: whole experiment
 Vmat = v5_full - v6_full
 plt.figure()
 plt.plot(time_full, Vmat)
@@ -131,34 +135,67 @@ plt.xlabel("time (s)")
 plt.ylabel("voltage (V)")
 plt.title("material voltage vs time")
 plt.tight_layout()
-plt.savefig('Vmat-vs-T.jpg', dpi=300)
+plt.savefig(SAVE_FOLDER / f"{TEST_NAME}-Vmat-vs-T.png",
+            dpi=300,
+            bbox_inches="tight")
+
+# Vmat vs T: zoom
+plt.figure()
+plt.plot(time_full, Vmat)
+plt.xlabel("time (s)")
+plt.ylabel("voltage (V)")
+plt.title("material voltage vs time (zoom)")
+plt.xlim(20,22)
+plt.tight_layout()
+plt.savefig(SAVE_FOLDER / f"{TEST_NAME}-zoom-Vmat-vs-T.png",
+            dpi=300,
+            bbox_inches="tight")
 
 I = Vshunt / Rshunt
 
-# whole experiment
+# Rmat vs T: whole experiment
 Rmat = Vmat / I
 plt.figure()
 plt.plot(time_full, Rmat)
 plt.xlabel("time (s)")
 plt.ylabel("resistance (ohms)")
-plt.title("resistance vs time")
+plt.title("material resistance vs time")
 plt.xlim(0,120)
 plt.tight_layout()
+plt.savefig(SAVE_FOLDER / f"{TEST_NAME}-Rmat-vs-T.png",
+            dpi=300,
+            bbox_inches="tight")
+
+# Rmat vs T: zoom
+plt.figure()
+plt.plot(time_full, Rmat)
+plt.xlabel("time (s)")
+plt.ylabel("resistance (ohms)")
+plt.title("material resistance vs time (zoom)")
+plt.xlim(20,22)
+plt.ylim(-500000,1500000)
+plt.tight_layout()
+plt.savefig(SAVE_FOLDER / f"{TEST_NAME}-zoom-Rmat-vs-T.png",
+            dpi=300,
+            bbox_inches="tight")
 
 #%% steady-state Ravg over ALL pulses
-phase = np.mod(time_full, 1.0)
-steady = (phase >= 0.30) & (phase <= 0.80)
+plen = 1.0 # individual pulse length
+phase = np.mod(time_full, plen)
+ss_start = 0.25 
+ss_end = 0.75
+
+steady = (phase >= ss_start) & (phase <= ss_end)
 Ravg = np.nanmean(Rmat[steady])
 
 #%% steady-state Ravgs PER pulse
 pulse = np.floor(time_full).astype(int)
-
 pulse_numbers = np.unique(pulse)
 
 Rpulse = []
 
 for p in pulse_numbers:
-    mask = (pulse == p) & (phase >= 0.30) & (phase <= 0.80)
+    mask = (pulse == p) & (phase >= ss_start) & (phase <= ss_end)
     Rpulse.append(np.nanmean(Rmat[mask]))
     
 plt.figure()
@@ -168,3 +205,22 @@ plt.ylabel("average resistance (Ω)")
 plt.title('Ravg per pulse over time')
 plt.tight_layout()
 plt.grid(True)
+plt.savefig(SAVE_FOLDER / f"{TEST_NAME}-Ravg-pp-vs-T.png",
+            dpi=300,
+            bbox_inches="tight")
+
+#%% save Rmat in CSV
+time_steady = time_full[steady]
+Rmat_steady = Rmat[steady]
+
+steady_df = pd.DataFrame({
+    "Time (s)": time_steady,
+    "Resistance (Ohms)": Rmat_steady
+})
+
+steady_df.to_csv(
+    SAVE_FOLDER / f"{TEST_NAME}-ss-Rmat.csv",
+    index=False
+)
+
+print("Steady-state resistance CSV saved.")
