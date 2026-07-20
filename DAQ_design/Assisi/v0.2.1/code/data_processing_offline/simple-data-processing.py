@@ -15,9 +15,7 @@ Header file last updated May 16, 2024
 from IPython import get_ipython
 get_ipython().run_line_magic('reset', '-f') 
 
-import re
 from pathlib import Path
-
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -40,19 +38,20 @@ cc = plt.rcParams['axes.prop_cycle'].by_key()['color']
 plt.close('all')
 
 #%% save settings
-TEST_FOLDER = "07152026"
-TEST_FILE = "test_1.lvm"
+# !!!!YOU HAVE TO CHANGE THESE EVERY NEW TEST!!!!
+TEST_FOLDER = "07152026" # folder you're using
+TEST_FILE = "test_1.lvm" # your data file from labview
 
-FILENAME = Path(TEST_FOLDER) / TEST_FILE
+FILENAME = Path(TEST_FOLDER) / TEST_FILE # path to save to
 
-TEST_NAME = FILENAME.stem
+TEST_NAME = FILENAME.stem # name files after your data file
 
-SAVE_FOLDER = Path(TEST_FOLDER) / "figures"
+SAVE_FOLDER = Path(TEST_FOLDER) / "figures" 
 SAVE_FOLDER.mkdir(parents=True, exist_ok=True)
 
 #%% data prep
 # Use the filename you already defined
-filename = FILENAME
+filename = FILENAME # yes, this is lazy. next.
 
 # Find the row that contains the real column headers
 with open(filename, "r", encoding="utf-8", errors="ignore") as f:
@@ -83,7 +82,7 @@ v4_cols = [c for c in df.columns if c.startswith("Voltage_4")]
 v5_cols = [c for c in df.columns if c.startswith("Voltage_5")]
 v6_cols = [c for c in df.columns if c.startswith("Voltage_6")]
 
-print(len(v4_cols), len(v5_cols), len(v6_cols))
+print(len(v4_cols), len(v5_cols), len(v6_cols)) # you want these to match
 
 # Time inside one block
 time_block = df["X_Value"].to_numpy()
@@ -98,6 +97,92 @@ v4_full = np.concatenate([df[c].to_numpy() for c in v4_cols[:nblocks]])
 v5_full = np.concatenate([df[c].to_numpy() for c in v5_cols[:nblocks]])
 v6_full = np.concatenate([df[c].to_numpy() for c in v6_cols[:nblocks]])
 
+#%% core calculations
+Rshunt = 1000000 # your plug's resistor in ohms
+Vshunt = v4_full - v5_full # voltage drop after Rshunt
+Vmat = v5_full - v6_full # voltage across material
+I = Vshunt / Rshunt # current after resistor
+Rmat = Vmat / I # resistance of material
+
+#%% steady-state Ravg
+# Find where the resistance crosses 0.5 MΩ
+low_thres = 0.5e6
+high_thres = 1.2e6
+
+pulse_wait = 0.25
+read_len = 0.20
+read_delay = 3.0
+
+Rpulse = []
+pulse_time = []
+
+# Find the rising edges
+rising = np.where(
+    (Rmat[:-1] < low_thres) &
+    (Rmat[1:] >= low_thres)
+)[0] + 1
+
+# Skip the first rising edge (startup transient)
+for start in rising[1:]:
+
+    start_time = time_full[start]
+
+    average_start = start_time + pulse_wait
+    average_end = average_start + read_len
+
+    mask = (
+        (time_full >= average_start) &
+        (time_full <= average_end)
+    )
+
+    Rpulse.append(np.mean(Rmat[mask]))
+    pulse_time.append(average_start)
+
+# Convert to NumPy arrays
+pulse_time = np.array(pulse_time)
+Rpulse = np.array(Rpulse)
+
+keep = (pulse_time > read_delay) & (Rpulse > low_thres) & (Rpulse < high_thres)
+pulse_time = pulse_time[keep]
+Rpulse = Rpulse[keep]
+
+#%% save steady-state Ravg per pulse in CSV
+Ravg_df = pd.DataFrame({
+    "Time (s)": pulse_time,
+    "Average Resistance (Ohms)": Rpulse
+})
+
+Ravg_df.to_csv(
+    SAVE_FOLDER / f"{TEST_NAME}_Ravg_per_pulse.csv",
+    index=False
+)
+
+print("Average resistance per pulse CSV saved.")
+
+#%% steady-state fft
+# Remove NaNs
+valid = np.isfinite(time_full) & np.isfinite(Rmat)
+
+t = time_full[valid]
+R = Rmat[valid]
+
+# Remove the DC offset (mean)
+R = R - np.mean(R)
+
+# Sampling interval
+dt = np.median(np.diff(t))
+
+# FFT
+freq = rfftfreq(len(R), d=dt)
+fft = np.abs(rfft(R))
+
+peak = np.argmax(fft[1:]) + 1
+
+print("Dominant frequency:", freq[peak], "Hz")
+
+#%% plots
+
+'''
 # A2 vs T: whole experiment
 plt.figure()
 plt.plot(time_full, v5_full)
@@ -122,13 +207,7 @@ plt.savefig(SAVE_FOLDER / f"{TEST_NAME}-zoom-A2-vs-T.png",
             dpi=300,
             bbox_inches="tight")
 
-#%% core calculations
-Rshunt = 1000000 # in ohms
-
-Vshunt = v4_full - v5_full
-
 # Vmat vs T: whole experiment
-Vmat = v5_full - v6_full
 plt.figure()
 plt.plot(time_full, Vmat)
 plt.xlabel("time (s)")
@@ -151,10 +230,7 @@ plt.savefig(SAVE_FOLDER / f"{TEST_NAME}-zoom-Vmat-vs-T.png",
             dpi=300,
             bbox_inches="tight")
 
-I = Vshunt / Rshunt
-
 # Rmat vs T: whole experiment
-Rmat = Vmat / I
 plt.figure()
 plt.plot(time_full, Rmat)
 plt.xlabel("time (s)")
@@ -179,48 +255,24 @@ plt.savefig(SAVE_FOLDER / f"{TEST_NAME}-zoom-Rmat-vs-T.png",
             dpi=300,
             bbox_inches="tight")
 
-#%% steady-state Ravg over ALL pulses
-plen = 1.0 # individual pulse length
-phase = np.mod(time_full, plen)
-ss_start = 0.25 
-ss_end = 0.75
-
-steady = (phase >= ss_start) & (phase <= ss_end)
-Ravg = np.nanmean(Rmat[steady])
-
-#%% steady-state Ravgs PER pulse
-pulse = np.floor(time_full).astype(int)
-pulse_numbers = np.unique(pulse)
-
-Rpulse = []
-
-for p in pulse_numbers:
-    mask = (pulse == p) & (phase >= ss_start) & (phase <= ss_end)
-    Rpulse.append(np.nanmean(Rmat[mask]))
-    
+# steady-state Ravg PER pulse over time
 plt.figure()
-plt.plot(pulse_numbers, Rpulse, 'o-')
-plt.xlabel("pulse number")
-plt.ylabel("average resistance (Ω)")
-plt.title('Ravg per pulse over time')
-plt.tight_layout()
+plt.plot(pulse_time, Rpulse, 'o-')
+plt.xlabel("Time (s)")
+plt.ylabel("Average Resistance (Ω)")
+plt.title("Average Steady-State Resistance vs Time")
+plt.ylim(5e5, 15e5)
+plt.xlim(0,120)
 plt.grid(True)
-plt.savefig(SAVE_FOLDER / f"{TEST_NAME}-Ravg-pp-vs-T.png",
+plt.savefig(SAVE_FOLDER / f"{TEST_NAME}-ss-ravg-pp-vs-t.png",
             dpi=300,
             bbox_inches="tight")
 
-#%% save Rmat in CSV
-time_steady = time_full[steady]
-Rmat_steady = Rmat[steady]
-
-steady_df = pd.DataFrame({
-    "Time (s)": time_steady,
-    "Resistance (Ohms)": Rmat_steady
-})
-
-steady_df.to_csv(
-    SAVE_FOLDER / f"{TEST_NAME}-ss-Rmat.csv",
-    index=False
-)
-
-print("Steady-state resistance CSV saved.")
+plt.figure()
+plt.plot(freq, fft)
+plt.xlabel("Frequency (Hz)")
+plt.ylabel("Magnitude")
+plt.title("FFT of Resistance")
+plt.grid(True)
+'''
+print('All plots generated and saved.')
