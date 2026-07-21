@@ -39,12 +39,12 @@ plt.close('all')
 
 #%% save settings
 # !!!!YOU HAVE TO CHANGE THESE EVERY NEW TEST!!!!
-TEST_FOLDER = "07152026" # folder you're using
-TEST_FILE = "test_1.lvm" # your data file from labview
+TEST_FOLDER = "07212026/test_2" # folder you're using
+TEST_FILE = "test_2.lvm" # your data file from labview
 
 FILENAME = Path(TEST_FOLDER) / TEST_FILE # path to save to
 
-TEST_NAME = FILENAME.stem # name files after your data file
+TEST_NAME = FILENAME.stem # name figures after your data file
 
 SAVE_FOLDER = Path(TEST_FOLDER) / "figures" 
 SAVE_FOLDER.mkdir(parents=True, exist_ok=True)
@@ -98,9 +98,9 @@ v5_full = np.concatenate([df[c].to_numpy() for c in v5_cols[:nblocks]]) # resist
 v6_full = np.concatenate([df[c].to_numpy() for c in v6_cols[:nblocks]])
 
 #%% core calculations
-Rshunt = 1e6 # your plug's resistor in ohms
-Vshunt = v4_full - v5_full # voltage drop after Rshunt
-Vmat = v5_full - v6_full # voltage across material
+Rshunt = 1e6 # your plug's resistor (Rshunt) in ohms
+Vshunt = v6_full - v5_full # voltage drop after Rshunt
+Vmat = v5_full - v4_full # voltage across material
 I = Vshunt / Rshunt # current after resistor
 Rmat = Vmat / I # resistance of material
 
@@ -109,9 +109,9 @@ Rmat = Vmat / I # resistance of material
 low_thres = 0.5e6 # must be higher than this (ohms)
 high_thres = 1.2e6 # must be lower than this (ohms)
 
+read_delay = 8.0 # wait this long after experiment start to read (s)
 pulse_wait = 0.25 # wait this long after bound trigger to read (s)
 read_len = 0.20 # read for this long (s)
-read_delay = 3.0 # wait this long after experiment start to read (s)
 
 Rpulse = []
 pulse_time = []
@@ -134,6 +134,10 @@ for start in rising[1:]:
         (time_full >= average_start) &
         (time_full <= average_end)
     )
+
+    if np.sum(mask) == 0:
+        print(f"No samples found between {average_start:.3f} and {average_end:.3f}")
+        continue
 
     Rpulse.append(np.mean(Rmat[mask]))
     pulse_time.append(average_start)
@@ -215,7 +219,6 @@ plt.title("material voltage vs time")
 plt.tight_layout()
 plt.savefig(SAVE_FOLDER / f"{TEST_NAME}-Vmat-vs-T.png",
             dpi=300,
-            bbox_inches="tight")
 
 # Vmat vs T: zoom
 plt.figure()
@@ -240,7 +243,7 @@ plt.tight_layout()
 plt.savefig(SAVE_FOLDER / f"{TEST_NAME}-Rmat-vs-T.png",
             dpi=300,
             bbox_inches="tight")
-
+'''
 # Rmat vs T: zoom
 plt.figure()
 plt.plot(time_full, Rmat)
@@ -248,12 +251,12 @@ plt.xlabel("time (s)")
 plt.ylabel("resistance (ohms)")
 plt.title("material resistance vs time (zoom)")
 plt.xlim(20,22)
-plt.ylim(-500000,1500000)
+plt.ylim(5e5,70e6)
 plt.tight_layout()
 plt.savefig(SAVE_FOLDER / f"{TEST_NAME}-zoom-Rmat-vs-T.png",
             dpi=300,
             bbox_inches="tight")
-
+'''
 # steady-state Ravg PER pulse over time
 plt.figure()
 plt.plot(pulse_time, Rpulse, 'o-')
@@ -267,6 +270,7 @@ plt.savefig(SAVE_FOLDER / f"{TEST_NAME}-ss-ravg-pp-vs-t.png",
             dpi=300,
             bbox_inches="tight")
 
+# FFT
 plt.figure()
 plt.plot(freq, fft)
 plt.xlabel("Frequency (Hz)")
