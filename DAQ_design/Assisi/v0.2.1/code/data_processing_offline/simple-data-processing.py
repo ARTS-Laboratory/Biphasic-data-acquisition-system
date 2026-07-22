@@ -40,8 +40,8 @@ plt.close('all')
 
 #%% save settings
 # !!!!YOU HAVE TO CHANGE THESE EVERY NEW TEST!!!!
-TEST_FOLDER = "07212026/test_2" # folder you're using
-TEST_FILE = "test_2.lvm" # your data file from labview
+TEST_FOLDER = "07212026/test_1" # folder you're using
+TEST_FILE = "07212026_test_1.lvm" # your data file from labview
 
 FILENAME = Path(TEST_FOLDER) / TEST_FILE # path to save to
 
@@ -218,9 +218,6 @@ print("Dominant frequency:", freq[peak], "Hz")
 
 #%% plots
 
-plt.plot(time_full, Vmat)
-plt.plot(time_full, Vshunt)
-
 '''
 # A2 vs T: whole experiment
 plt.figure()
@@ -299,8 +296,8 @@ plt.plot(pulse_time, Rpulse, 'o-')
 plt.xlabel("pulse number")
 plt.ylabel("Average Resistance (Ω)")
 plt.title("Average Steady-State Resistance vs Time")
-plt.ylim(9e5, 1e6)
-plt.xlim(0,45)
+plt.ylim(89e4, 94e4)
+plt.xlim(0,92)
 plt.grid(True)
 plt.savefig(SAVE_FOLDER / f"{TEST_NAME}-ss-ravg-pp-vs-t.png",
             dpi=300,
