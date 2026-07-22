@@ -104,15 +104,18 @@ v2 = v5_full # after resistor
 v3 = v4_full # across material
 
 #%% optional lowpass filter
-USE_FILTER = True
+# lowpass filters are the general purpose option
+# they reduce high freq and preserve low freq trends
+USE_FILTER = True # true is on, false is off
 
 if USE_FILTER:
 
     fs = 1.0 / dt      # sample rate from the data
-    cutoff = 30.0      # Hz
-    order = 4
+    cutoff = 30.0      # freq in Hz
+    order = 4          # filter intensity, higher = stricter
 
     b, a = butter(order, cutoff / (fs / 2), btype="low")
+    # butterworth is another general purpose option
 
     v1_use = filtfilt(b, a, v1)
     v2_use = filtfilt(b, a, v2)
