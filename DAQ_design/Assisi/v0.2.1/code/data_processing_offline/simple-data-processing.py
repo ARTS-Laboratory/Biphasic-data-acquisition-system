@@ -20,6 +20,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from scipy.fft import rfft, rfftfreq
+from scipy.signal import butter, filtfilt
 
 # set default fonts and plot colors
 plt.rcParams.update({'text.usetex': False})
@@ -97,10 +98,34 @@ v4_full = np.concatenate([df[c].to_numpy() for c in v4_cols[:nblocks]])
 v5_full = np.concatenate([df[c].to_numpy() for c in v5_cols[:nblocks]]) # resistance curve
 v6_full = np.concatenate([df[c].to_numpy() for c in v6_cols[:nblocks]])
 
+# rewrite voltages to match wiring diagram
+v1 = v6_full # before resistor
+v2 = v5_full # after resistor
+v3 = v4_full # across material
+
+#%% optional lowpass filter
+USE_FILTER = True
+
+if USE_FILTER:
+
+    fs = 1.0 / dt      # sample rate from the data
+    cutoff = 30.0      # Hz
+    order = 4
+
+    b, a = butter(order, cutoff / (fs / 2), btype="low")
+
+    v1_use = filtfilt(b, a, v1)
+    v2_use = filtfilt(b, a, v2)
+    v3_use = filtfilt(b, a, v3)
+else:
+    v1_use = v1
+    v2_use = v2
+    v3_use = v3
+
 #%% core calculations
 Rshunt = 1e6 # your plug's resistor (Rshunt) in ohms
-Vshunt = v6_full - v5_full # voltage drop after Rshunt
-Vmat = v5_full - v4_full # voltage across material
+Vshunt = v1_use - v2_use # voltage drop after Rshunt
+Vmat = v2_use - v3_use # voltage across material
 I = Vshunt / Rshunt # current after resistor
 Rmat = Vmat / I # resistance of material
 
@@ -146,9 +171,14 @@ for start in rising[1:]:
 pulse_time = np.array(pulse_time)
 Rpulse = np.array(Rpulse)
 
+# Keep only valid points based on the raw signal
 keep = (pulse_time > read_delay) & (Rpulse > low_thres) & (Rpulse < high_thres)
+
 pulse_time = pulse_time[keep]
 Rpulse = Rpulse[keep]
+
+# Make the x-axis evenly spaced: one point per pulse
+pulse_time = np.arange(len(Rpulse))
 
 #%% save steady-state Ravg per pulse in CSV
 Ravg_df = pd.DataFrame({
@@ -185,6 +215,9 @@ print("Dominant frequency:", freq[peak], "Hz")
 
 #%% plots
 
+plt.plot(time_full, Vmat)
+plt.plot(time_full, Vshunt)
+
 '''
 # A2 vs T: whole experiment
 plt.figure()
@@ -196,7 +229,7 @@ plt.tight_layout()
 plt.savefig(SAVE_FOLDER / f"{TEST_NAME}-A2-vs-T.png",
             dpi=300,
             bbox_inches="tight")
-
+'''
 # A2 vs T: zoom
 plt.figure()
 plt.plot(time_full, v5_full)
@@ -209,7 +242,7 @@ plt.tight_layout()
 plt.savefig(SAVE_FOLDER / f"{TEST_NAME}-zoom-A2-vs-T.png",
             dpi=300,
             bbox_inches="tight")
-
+'''
 # Vmat vs T: whole experiment
 plt.figure()
 plt.plot(time_full, Vmat)
@@ -219,7 +252,7 @@ plt.title("material voltage vs time")
 plt.tight_layout()
 plt.savefig(SAVE_FOLDER / f"{TEST_NAME}-Vmat-vs-T.png",
             dpi=300,
-
+'''
 # Vmat vs T: zoom
 plt.figure()
 plt.plot(time_full, Vmat)
@@ -231,10 +264,10 @@ plt.tight_layout()
 plt.savefig(SAVE_FOLDER / f"{TEST_NAME}-zoom-Vmat-vs-T.png",
             dpi=300,
             bbox_inches="tight")
-
+'''
 # Rmat vs T: whole experiment
 plt.figure()
-plt.plot(time_full, Rmat)
+plt.plot(time_full, Rmat_use)
 plt.xlabel("time (s)")
 plt.ylabel("resistance (ohms)")
 plt.title("material resistance vs time")
@@ -256,20 +289,20 @@ plt.tight_layout()
 plt.savefig(SAVE_FOLDER / f"{TEST_NAME}-zoom-Rmat-vs-T.png",
             dpi=300,
             bbox_inches="tight")
-'''
+
 # steady-state Ravg PER pulse over time
 plt.figure()
 plt.plot(pulse_time, Rpulse, 'o-')
-plt.xlabel("Time (s)")
+plt.xlabel("pulse number")
 plt.ylabel("Average Resistance (Ω)")
 plt.title("Average Steady-State Resistance vs Time")
-plt.ylim(5e5, 15e5)
-plt.xlim(0,120)
+plt.ylim(9e5, 1e6)
+plt.xlim(0,45)
 plt.grid(True)
 plt.savefig(SAVE_FOLDER / f"{TEST_NAME}-ss-ravg-pp-vs-t.png",
             dpi=300,
             bbox_inches="tight")
-
+'''
 # FFT
 plt.figure()
 plt.plot(freq, fft)
