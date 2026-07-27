@@ -112,25 +112,7 @@ USE_FILTER = True # true is on, false is off
 FILTER_TYPE = "lowpass"
 
 if USE_FILTER:
-
-    fs = 1.0 / dt      # sample rate from the data
-    cutoff = 30.0      # freq in Hz
-    order = 4          # filter intensity, higher = stricter
-
-    b, a = butter(order, cutoff / (fs / 2), btype="low")
-    # butterworth is another general purpose option
-
-    v1_use = filtfilt(b, a, v1)
-    v2_use = filtfilt(b, a, v2)
-    v3_use = filtfilt(b, a, v3)
-else:
-    v1_use = v1
-    v2_use = v2
-    v3_use = v3
-
-if USE_FILTER:
     if FILTER_TYPE == "lowpass":
-        from scipy.signal import butter, filtfilt
 
         fs = 1 / dt # number of samples from data
         cutoff = 30 # freq bound in Hz
@@ -173,7 +155,7 @@ pulse_time = []
 read_delay = 8.0    # ignore pulses before this time (s)
 pulse_wait = 0.15   # wait after pulse begins before averaging (s)
 read_len = 0.20     # averaging window length (s)
-min_gap_s = 0.80    # minimum spacing between detected pulses (s)
+min_gap_s = 0.85    # minimum spacing between detected pulses (s)
 
 # Detect pulses from the shunt voltage (independent of material)
 # Set to +1 if the high plateau occurs when Vshunt is positive
