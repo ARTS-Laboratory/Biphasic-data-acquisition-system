@@ -260,6 +260,7 @@ if len(Rpulse) == 0:
 print("Rmat min:", np.min(Rmat))
 print("Rmat max:", np.max(Rmat))
 print("Rmat median:", np.median(Rmat))
+
 # Automatically determine acceptable pulse-average range using IQR
 center = np.median(Rpulse)
 spread = np.percentile(Rpulse, 75) - np.percentile(Rpulse, 25)
