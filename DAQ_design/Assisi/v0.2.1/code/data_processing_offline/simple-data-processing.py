@@ -40,8 +40,8 @@ plt.close('all')
 
 #%% save settings
 # !!!!YOU HAVE TO CHANGE THESE EVERY NEW TEST!!!!
-TEST_FOLDER = "07212026/test_2" # folder you're using
-TEST_FILE = "test_2.lvm" # your data file from labview
+TEST_FOLDER = "labview_daq/07272026/CMF-0.01" # folder you're using
+TEST_FILE = "1Hz-9201-resistor-1Mohm.lvm" # your data file from labview
 
 FILENAME = Path(TEST_FOLDER) / TEST_FILE # path to save to
 
@@ -148,14 +148,17 @@ I = Vshunt / Rshunt # current after resistor
 Rmat = Vmat / I # resistance of material
 
 #%% steady-state Ravg
-
 Rpulse = []
 pulse_time = []
 
-read_delay = 8.0    # ignore pulses before this time (s)
-pulse_wait = 0.15   # wait after pulse begins before averaging (s)
-read_len = 0.20     # averaging window length (s)
-min_gap_s = 0.85    # minimum spacing between detected pulses (s)
+# !!!! CHANGE PER TEST !!!!
+freq = 1 # arduino freq in Hz
+pulse_period = 1 / freq
+
+read_delay = 8.0 # ignore pulses before this time (s)
+pulse_wait = 0.15 * pulse_period # wait after pulse begins before averaging (s)
+read_len = 0.20 * pulse_period   # averaging window length (s)
+min_gap_s = 0.85 * pulse_period  # minimum spacing between detected pulses (s)
 
 # Detect pulses from the shunt voltage (independent of material)
 # Set to +1 if the high plateau occurs when Vshunt is positive
@@ -415,7 +418,7 @@ plt.title("Average Steady-State Resistance vs Time")
 #plt.ylim(9e5, 1e6)
 #plt.xlim(0,70)
 plt.grid(True)
-plt.savefig(SAVE_FOLDER / f"{TEST_NAME}-ss-ravg-pp-vs-t.png",
+plt.savefig(SAVE_FOLDER / f"{TEST_NAME}-ss-ravg-vs-t.png",
             dpi=300,
             bbox_inches="tight")
 
