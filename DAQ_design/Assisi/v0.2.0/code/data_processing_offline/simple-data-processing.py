@@ -40,8 +40,8 @@ plt.close('all')
 
 #%% save settings
 # !!!!YOU HAVE TO CHANGE THESE EVERY NEW TEST!!!!
-TEST_FOLDER = "07212026/test_2" # folder you're using
-TEST_FILE = "test_2.lvm" # your data file from labview
+TEST_FOLDER = "labview_daq/07272026/CMF-0.01/10Hz-9201-CMF-0.01" # folder you're using
+TEST_FILE = "10Hz-9201-CMF-0.01.lvm" # your data file from labview
 
 FILENAME = Path(TEST_FOLDER) / TEST_FILE # path to save to
 
@@ -148,14 +148,21 @@ I = Vshunt / Rshunt # current after resistor
 Rmat = Vmat / I # resistance of material
 
 #%% steady-state Ravg
-
 Rpulse = []
 pulse_time = []
 
-read_delay = 8.0    # ignore pulses before this time (s)
-pulse_wait = 0.15   # wait after pulse begins before averaging (s)
-read_len = 0.20     # averaging window length (s)
-min_gap_s = 0.85    # minimum spacing between detected pulses (s)
+# !!!! CHANGE PER TEST !!!!
+freq = 10 # arduino freq in Hz
+
+if freq <= 5:
+    pulse_period = 1.0 / freq
+else:
+    pulse_period = 0.5 / freq
+
+read_delay = 8.0 # ignore pulses before this time (s)
+pulse_wait = 0.15 * pulse_period # wait after pulse begins before averaging (s)
+read_len = 0.20 * pulse_period   # averaging window length (s)
+min_gap_s = 0.85 * pulse_period  # minimum spacing between detected pulses (s)
 
 # Detect pulses from the shunt voltage (independent of material)
 # Set to +1 if the high plateau occurs when Vshunt is positive
@@ -209,43 +216,6 @@ for start in clean_rising[1:]:
             f"window={average_start:.3f} to {average_end:.3f}"
         )
         continue
-    
-    if 20.0 < start_time < 21.0:
-        print(f"start_time = {start_time:.3f}")
-        print(f"average_start = {average_start:.3f}")
-        print(f"average_end = {average_end:.3f}")
-        print(f"mean = {np.mean(vals):.3e}")
-
-        plt.figure()
-
-        plt.plot(time_full, Rmat, label="Rmat")
-
-        plt.axvspan(
-            average_start,
-            average_end,
-            color="red",
-            alpha=0.3,
-            label="Averaging window"
-        )
-        plt.axvline(
-        start_time,
-        color="green",
-        linestyle="--",
-        label="Pulse detected"
-        )
-
-        plt.xlim(start_time - 0.2, start_time + 1.0)
-        plt.ylim(1.5e7, 3.5e7)
-
-        plt.xlabel("Time (s)")
-        plt.ylabel("Resistance (Ω)")
-        plt.title("Material Resistance with Averaging Window")
-
-        plt.grid(True)
-        plt.legend()
-        plt.savefig(SAVE_FOLDER / f"{TEST_NAME}-ravg-source.png",
-                    dpi=300,
-                    bbox_inches="tight")
         
     Rpulse.append(np.mean(vals))
     pulse_time.append(average_start)
@@ -260,6 +230,7 @@ if len(Rpulse) == 0:
 print("Rmat min:", np.min(Rmat))
 print("Rmat max:", np.max(Rmat))
 print("Rmat median:", np.median(Rmat))
+
 # Automatically determine acceptable pulse-average range using IQR
 center = np.median(Rpulse)
 spread = np.percentile(Rpulse, 75) - np.percentile(Rpulse, 25)
@@ -331,8 +302,7 @@ peak = np.argmax(fft[1:]) + 1
 
 print("Dominant frequency:", freq[peak], "Hz")
 
-#%% plots
-
+#%% general plots
 '''
 # A2 vs T: whole experiment
 plt.figure()
@@ -352,7 +322,7 @@ plt.xlabel("time (s)")
 plt.ylabel("voltage (V)")
 plt.title("raw curve (A2) vs time (zoom)")
 plt.xlim(20,22)
-plt.ylim(4,5)
+#plt.ylim(4,5)
 plt.tight_layout()
 plt.savefig(SAVE_FOLDER / f"{TEST_NAME}-zoom-A2-vs-T.png",
             dpi=300,
@@ -379,7 +349,7 @@ plt.tight_layout()
 plt.savefig(SAVE_FOLDER / f"{TEST_NAME}-zoom-Vmat-vs-T.png",
             dpi=300,
             bbox_inches="tight")
-
+'''
 # Rmat vs T: whole experiment
 plt.figure()
 plt.plot(time_full, Rmat)
@@ -391,7 +361,7 @@ plt.tight_layout()
 plt.savefig(SAVE_FOLDER / f"{TEST_NAME}-Rmat-vs-T.png",
             dpi=300,
             bbox_inches="tight")
-
+'''
 # Rmat vs T: zoom
 plt.figure()
 plt.plot(time_full, Rmat)
@@ -399,7 +369,7 @@ plt.xlabel("time (s)")
 plt.ylabel("resistance (ohms)")
 plt.title("material resistance vs time (zoom)")
 plt.xlim(20,22)
-plt.ylim(5e5,70e6)
+#plt.ylim(5e5,70e6)
 plt.tight_layout()
 plt.savefig(SAVE_FOLDER / f"{TEST_NAME}-zoom-Rmat-vs-T.png",
             dpi=300,
@@ -407,17 +377,16 @@ plt.savefig(SAVE_FOLDER / f"{TEST_NAME}-zoom-Rmat-vs-T.png",
 
 # steady-state Ravg PER pulse over time
 plt.figure()
-plt.plot(pulse_time, Rpulse, 'o-')
+plt.plot(pulse_time + 1, Rpulse, 'o-')
 plt.xlabel("pulse number")
 plt.ylabel("Average Resistance (Ω)")
 plt.title("Average Steady-State Resistance vs Time")
 #plt.ylim(9e5, 1e6)
 #plt.xlim(0,70)
 plt.grid(True)
-plt.savefig(SAVE_FOLDER / f"{TEST_NAME}-ss-ravg-pp-vs-t.png",
+plt.savefig(SAVE_FOLDER / f"{TEST_NAME}-ss-ravg-vs-t.png",
             dpi=300,
             bbox_inches="tight")
-
 '''
 # FFT
 plt.figure()
@@ -427,5 +396,42 @@ plt.ylabel("Magnitude")
 plt.title("FFT of Resistance")
 plt.grid(True)
 '''
+#%% averaging window plot
+if 20.0 < start_time < 21.0:
+    print(f"start_time = {start_time:.3f}")
+    print(f"average_start = {average_start:.3f}")
+    print(f"average_end = {average_end:.3f}")
+    print(f"mean = {np.mean(vals):.3e}")
+
+    plt.figure()
+
+    plt.plot(time_full, Rmat, label="Rmat")
+
+    plt.axvspan(
+        average_start,
+        average_end,
+        color="red",
+        alpha=0.3,
+        label="Averaging window"
+    )
+    plt.axvline(
+    start_time,
+    color="green",
+    linestyle="--",
+    label="Pulse detected"
+    )
+
+    plt.xlim(start_time - 0.2, start_time + 1.0)
+    plt.ylim(-0.5e9, 0.5e9)
+
+    plt.xlabel("Time (s)")
+    plt.ylabel("Resistance (Ω)")
+    plt.title("Material Resistance with Averaging Window")
+
+    plt.grid(True)
+    plt.legend()
+    plt.savefig(SAVE_FOLDER / f"{TEST_NAME}-ravg-source.png",
+                dpi=300,
+                bbox_inches="tight")
 
 print('All plots generated and saved.')
