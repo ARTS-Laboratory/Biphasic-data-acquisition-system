@@ -7,7 +7,9 @@
 * This code runs on Arduino.
 
 ## data_processing_offline
-* LabView code collects data (voltage) and saves it to a LVM file.
+* Two data aquisition options:
+    - labview_daq: LabView 2025 code collects data (voltage) and saves it to a LVM file.
+    - python_daq: Python code collects data (voltage) and saves it to a LVM file.
 * Python code reads LVM file and returns a CSV file of the resistance over time.
 
 ## data_processing_online
