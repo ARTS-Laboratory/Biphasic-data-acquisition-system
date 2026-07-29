@@ -38,11 +38,18 @@ cc = plt.rcParams['axes.prop_cycle'].by_key()['color']
 ## End of plot formatting code
 plt.close('all')
 
-#%% save settings
+#%% things you have to change
 # !!!!YOU HAVE TO CHANGE THESE EVERY NEW TEST!!!!
 TEST_FOLDER = "labview_daq/07272026/CMF-0.01/10Hz-9201-CMF-0.01" # folder you're using
 TEST_FILE = "10Hz-9201-CMF-0.01.lvm" # your data file from labview
 
+freq = 20 # arduino freq in Hz
+Rshunt = 1e6 # your plug's resistor (Rshunt) in ohms
+
+USE_FILTER = True # true is on, false is off
+FILTER_TYPE = "lowpass" # lowpass or moving_average
+
+#%% save settings
 FILENAME = Path(TEST_FOLDER) / TEST_FILE # path to save to
 
 TEST_NAME = FILENAME.stem # name figures after your data file
@@ -107,10 +114,7 @@ v3 = v4_full # across material
 # 2 filter options:
     # lowpass - reduce high freq and preserve low freq trends
     # moving_average - every value is an average of its neighbors
-        # have to manually change window for moving_average
-USE_FILTER = True # true is on, false is off
-FILTER_TYPE = "lowpass"
-
+        
 if USE_FILTER:
     if FILTER_TYPE == "lowpass":
 
@@ -141,7 +145,6 @@ else:
     v3_use = v3
 
 #%% core calculations
-Rshunt = 1e6 # your plug's resistor (Rshunt) in ohms
 Vshunt = v1_use - v2_use # voltage drop after Rshunt
 Vmat = v2_use - v3_use # voltage across material
 I = Vshunt / Rshunt # current after resistor
@@ -151,15 +154,12 @@ Rmat = Vmat / I # resistance of material
 Rpulse = []
 pulse_time = []
 
-# !!!! CHANGE PER TEST !!!!
-freq = 10 # arduino freq in Hz
-
 if freq <= 5:
     pulse_period = 1.0 / freq
 else:
     pulse_period = 0.5 / freq
 
-read_delay = 8.0 # ignore pulses before this time (s)
+read_delay = 5.0 # ignore pulses before this time (s)
 pulse_wait = 0.15 * pulse_period # wait after pulse begins before averaging (s)
 read_len = 0.20 * pulse_period   # averaging window length (s)
 min_gap_s = 0.85 * pulse_period  # minimum spacing between detected pulses (s)
@@ -395,6 +395,9 @@ plt.xlabel("Frequency (Hz)")
 plt.ylabel("Magnitude")
 plt.title("FFT of Resistance")
 plt.grid(True)
+plt.savefig(SAVE_FOLDER / f"{TEST_NAME}-fft.png",
+            dpi=300,
+            bbox_inches="tight")
 '''
 #%% averaging window plot
 if 20.0 < start_time < 21.0:
