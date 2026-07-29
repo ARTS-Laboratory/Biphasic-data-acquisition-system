@@ -41,7 +41,7 @@ plt.close('all')
 #%% what does this code do? TL;DR...
 # import data file (LVM)
 # find FFT, Vshunt, I, Vmat, Rmat, Ravg of Rmat 
-# generate respective plots and Ravg CSV
+# generate and save respective plots and Ravg CSV
 
 #%% things you have to change
 # !!!!YOU HAVE TO CHANGE THESE EVERY NEW TEST!!!!
