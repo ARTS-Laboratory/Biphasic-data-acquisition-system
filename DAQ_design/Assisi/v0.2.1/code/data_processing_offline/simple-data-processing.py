@@ -422,7 +422,7 @@ if 20.0 < start_time < 21.0:
     )
 
     plt.xlim(start_time - 0.2, start_time + 1.0)
-    plt.ylim(-0.5e9, 0.5e9)
+    plt.ylim(-0.5e8, 0.5e8)
 
     plt.xlabel("Time (s)")
     plt.ylabel("Resistance (Ω)")

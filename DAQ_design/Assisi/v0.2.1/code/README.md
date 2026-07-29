@@ -11,6 +11,7 @@
     - labview_daq: LabView 2025 code collects data (voltage) and saves it to a LVM file.
     - python_daq: Python code collects data (voltage) and saves it to a LVM file.
 * Python code reads LVM file and returns a CSV file of the resistance over time.
+* Experimental data folders are labeled in MM/DD/YYYY format.
 
 ## data_processing_online
 * LabView code 2025 collects data (voltage) and converts to resistance data in the program before saving it as a LVM file.
