@@ -38,6 +38,11 @@ cc = plt.rcParams['axes.prop_cycle'].by_key()['color']
 ## End of plot formatting code
 plt.close('all')
 
+#%% what does this code do? TL;DR...
+# import data file (LVM)
+# find FFT, Vshunt, I, Vmat, Rmat, Ravg of Rmat 
+# generate respective plots and Ravg CSV
+
 #%% things you have to change
 # !!!!YOU HAVE TO CHANGE THESE EVERY NEW TEST!!!!
 TEST_FOLDER = "labview_daq/07272026/CMF-0.01/10Hz-9201-CMF-0.01" # folder you're using
@@ -54,17 +59,18 @@ FILENAME = Path(TEST_FOLDER) / TEST_FILE # path to save to
 
 TEST_NAME = FILENAME.stem # name figures after your data file
 
-SAVE_FOLDER = Path(TEST_FOLDER) / "figures" 
+SAVE_FOLDER = Path(TEST_FOLDER) / "figures" # put figures here (you have to make this folder yourself)
 SAVE_FOLDER.mkdir(parents=True, exist_ok=True)
 
 #%% data prep
 # Use the filename you already defined
-filename = FILENAME # yes, this is lazy. next.
+filename = FILENAME # yes, this is lazy. keep scrolling.
 
 # Find the row that contains the real column headers
 with open(filename, "r", encoding="utf-8", errors="ignore") as f:
     lines = f.readlines()
 
+# denotes "" as header row
 header_row = None
 for i, line in enumerate(lines):
     if line.startswith("X_Value"):
