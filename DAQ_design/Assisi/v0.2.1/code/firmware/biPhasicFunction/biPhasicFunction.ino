@@ -35,7 +35,7 @@ void setup(){
 //  Serial.print("frequency set to: ");
 //  Serial.println(userfrq);
 
-float userfrq = 5.0; // presetting freq so i dont have to plug in usb
+float userfrq = 20.0; // presetting freq so i dont have to plug in usb
 
 unsigned long start = millis();
 
