@@ -40,8 +40,8 @@ plt.close('all')
 
 #%% save settings
 # !!!!YOU HAVE TO CHANGE THESE EVERY NEW TEST!!!!
-TEST_FOLDER = Path(r"C:\Users\giese\OneDrive\Documents\GitHub\Biphasic-data-acquisition-system\DAQ_design\Assisi\v0.2.0\code\testing\biphtestdata\300MainTesting") # folder you're using
-TEST_FILE = "test_1.lvm" # your data file from labview
+TEST_FOLDER = Path(r"C:\Users\giese\OneDrive\Documents\GitHub\Biphasic-data-acquisition-system\DAQ_design\Assisi\v0.2.0\code\testing\biphtestdata\300MainTesting\72926") # folder you're using
+TEST_FILE = "test.lvm" # your data file from labview
 
 FILENAME = TEST_FOLDER / TEST_FILE # path to save to
 
@@ -60,7 +60,7 @@ with open(filename, "r", encoding="utf-8", errors="ignore") as f:
 
 header_row = None
 for i, line in enumerate(lines):
-    if line.startswith("X_Value"):
+    if line.strip().startswith("X_Value"):
         header_row = i
         break
 
@@ -241,7 +241,7 @@ for start in clean_rising[1:]:
         )
 
         plt.xlim(start_time - 0.2, start_time + 1.0)
-        plt.ylim(1.5e7, 3.5e7)
+        plt.ylim(1.5e6, 3.5e6)
 
         plt.xlabel("Time (s)")
         plt.ylabel("Resistance (Ω)")
