@@ -12,8 +12,8 @@ books. This common header is used to set the fonts and format.
 Header file last updated May 16, 2024
 """
 
-from IPython import get_ipython
-get_ipython().run_line_magic('reset', '-f') 
+# from IPython import get_ipython
+# get_ipython().run_line_magic('reset', '-f') 
 
 from pathlib import Path
 import numpy as np
@@ -45,17 +45,18 @@ plt.close('all')
 
 #%% things you have to change
 # !!!!YOU HAVE TO CHANGE THESE EVERY NEW TEST!!!!
-TEST_FOLDER = "labview_daq/07272026/CMF-0.01/10Hz-9201-CMF-0.01" # folder you're using
-TEST_FILE = "10Hz-9201-CMF-0.01.lvm" # your data file from labview
+TEST_FOLDER = Path(r"C:\Users\giese\OneDrive\Documents\GitHub\Biphasic-data-acquisition-system\DAQ_design\Assisi\v0.2.0\code\testing\biphtestdata\300MainTesting\72926") # folder you're using
+TEST_FILE = "test.lvm" # your data file from labview
 
-freq = 20 # arduino freq in Hz
+
+freq = 2 # arduino freq in Hz
 Rshunt = 1e6 # your plug's resistor (Rshunt) in ohms
 
 USE_FILTER = True # true is on, false is off
 FILTER_TYPE = "lowpass" # lowpass or moving_average
 
 #%% save settings
-FILENAME = Path(TEST_FOLDER) / TEST_FILE # path to save to
+FILENAME = TEST_FOLDER / TEST_FILE # path to save to
 
 TEST_NAME = FILENAME.stem # name figures after your data file
 
@@ -222,6 +223,45 @@ for start in clean_rising[1:]:
             f"window={average_start:.3f} to {average_end:.3f}"
         )
         continue
+
+    #%% averaging window plot
+    if 20.0 < start_time < 21.0:
+        print(f"start_time = {start_time:.3f}")
+        print(f"average_start = {average_start:.3f}")
+        print(f"average_end = {average_end:.3f}")
+        print(f"mean = {np.mean(vals):.3e}")
+
+        plt.figure()
+
+        plt.plot(time_full, Rmat, label="Rmat")
+
+        plt.axvspan(
+            average_start,
+            average_end,
+            color="red",
+            alpha=0.3,
+            label="Averaging window"
+        )
+        plt.axvline(
+        start_time,
+        color="green",
+        linestyle="--",
+        label="Pulse detected"
+        )
+
+        plt.xlim(start_time - 0.2, start_time + 1.0)
+        plt.ylim(-0.5e8, 0.5e8)
+
+        plt.xlabel("Time (s)")
+        plt.ylabel("Resistance (Ω)")
+        plt.title("Material Resistance with Averaging Window")
+
+        plt.grid(True)
+        plt.legend()
+        plt.savefig(SAVE_FOLDER / f"{TEST_NAME}-ravg-source.png",
+                    dpi=300,
+                    bbox_inches="tight")
+
         
     Rpulse.append(np.mean(vals))
     pulse_time.append(average_start)
@@ -405,42 +445,5 @@ plt.savefig(SAVE_FOLDER / f"{TEST_NAME}-fft.png",
             dpi=300,
             bbox_inches="tight")
 '''
-#%% averaging window plot
-if 20.0 < start_time < 21.0:
-    print(f"start_time = {start_time:.3f}")
-    print(f"average_start = {average_start:.3f}")
-    print(f"average_end = {average_end:.3f}")
-    print(f"mean = {np.mean(vals):.3e}")
-
-    plt.figure()
-
-    plt.plot(time_full, Rmat, label="Rmat")
-
-    plt.axvspan(
-        average_start,
-        average_end,
-        color="red",
-        alpha=0.3,
-        label="Averaging window"
-    )
-    plt.axvline(
-    start_time,
-    color="green",
-    linestyle="--",
-    label="Pulse detected"
-    )
-
-    plt.xlim(start_time - 0.2, start_time + 1.0)
-    plt.ylim(-0.5e8, 0.5e8)
-
-    plt.xlabel("Time (s)")
-    plt.ylabel("Resistance (Ω)")
-    plt.title("Material Resistance with Averaging Window")
-
-    plt.grid(True)
-    plt.legend()
-    plt.savefig(SAVE_FOLDER / f"{TEST_NAME}-ravg-source.png",
-                dpi=300,
-                bbox_inches="tight")
 
 print('All plots generated and saved.')
