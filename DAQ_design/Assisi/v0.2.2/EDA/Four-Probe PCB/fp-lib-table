@@ -1,0 +1,5 @@
+(fp_lib_table
+  (version 7)
+  (lib (name "pretties")(type "KiCad")(uri "C:/Users/giese/OneDrive/Documents/GitHub/Biphasic-data-acquisition-system/DAQ_design/Assisi/v0.2.2/EDA/pretties")(options "")(descr ""))
+  (lib (name "EDA Footprint")(type "KiCad")(uri "C:/Users/giese/OneDrive/Documents/Work/Research/Bi-Phasic/EDA Footprint")(options "")(descr ""))
+)
