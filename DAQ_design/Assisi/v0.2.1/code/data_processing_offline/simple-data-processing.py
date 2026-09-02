@@ -45,10 +45,10 @@ plt.close('all')
 
 #%% things you have to change
 # !!!!YOU HAVE TO CHANGE THESE EVERY NEW TEST!!!!
-TEST_FOLDER = "labview_daq/07272026/CMF-1/10Hz-9201-CMF-1" # folder you're using
-TEST_FILE = "10Hz-9201-CMF-1.lvm" # your data file from labview
+TEST_FOLDER = "labview_daq/07292026/instron/5Hz-9201-CMF-1-0.8kNconstant" # folder you're using
+TEST_FILE = "5Hz-9201-CMF-1-0.8kNconstant.lvm" # your data file from labview
 
-freq = 10 # arduino freq in Hz
+freq = 5 # arduino freq in Hz
 Rshunt = 1e6 # your plug's resistor (Rshunt) in ohms
 
 USE_FILTER = True # true is on, false is off
