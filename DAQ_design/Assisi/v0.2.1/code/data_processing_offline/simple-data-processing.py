@@ -41,14 +41,14 @@ plt.close('all')
 #%% what does this code do? TL;DR...
 # import data file (LVM)
 # find FFT, Vshunt, I, Vmat, Rmat, Ravg of Rmat 
-# generate and save respective plots and Ravg CSV
+# generate and save respective plots (PNG) and Ravg CSV
 
 #%% things you have to change
 # !!!!YOU HAVE TO CHANGE THESE EVERY NEW TEST!!!!
-TEST_FOLDER = "labview_daq/07292026/pre/5Hz-9201-CMF-0.1-pre" # folder you're using
-TEST_FILE = "test1.lvm" # your data file from labview
+TEST_FOLDER = "labview_daq/07272026/CMF-1/10Hz-9201-CMF-1" # folder you're using
+TEST_FILE = "10Hz-9201-CMF-1.lvm" # your data file from labview
 
-freq = 5 # arduino freq in Hz
+freq = 10 # arduino freq in Hz
 Rshunt = 1e6 # your plug's resistor (Rshunt) in ohms
 
 USE_FILTER = True # true is on, false is off
