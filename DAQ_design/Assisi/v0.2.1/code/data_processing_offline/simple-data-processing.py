@@ -45,8 +45,8 @@ plt.close('all')
 
 #%% things you have to change
 # !!!!YOU HAVE TO CHANGE THESE EVERY NEW TEST!!!!
-TEST_FOLDER = "labview_daq/07292026/post/20Hz-9201-CMF-1-post" # folder you're using
-TEST_FILE = "20Hz-9201-CMF-1-post.lvm" # your data file from labview
+TEST_FOLDER = "labview_daq/07302026/pre/20Hz-9201-CMF-1-quarry-pre(550)" # folder you're using
+TEST_FILE = "test1.lvm" # your data file from labview
 
 freq = 20 # arduino freq in Hz
 Rshunt = 1e6 # your plug's resistor (Rshunt) in ohms
