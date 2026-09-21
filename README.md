@@ -29,12 +29,12 @@ This work is licensed under a
 
 Cite as:
 
-David Wamai, Hasan Borke Birgin, Austin Downey, and Joud Satme. Biphasic data acquisition system. GitHub. URL: https://github.com/ARTS-Laboratory/Biphasic-data-acquisition-system
+ARTS-Lab. Biphasic data acquisition system. GitHub. URL: https://github.com/ARTS-Laboratory/Biphasic-data-acquisition-system
  
 in bibtex
 
 @Misc{ARTSLabBiphasicDataAcquisition,   
-  author       = {ARTS-Lab},  
+  author       = {{ARTS-L}ab},  
   howpublished = {GitHub},  
   title        = {Biphasic Data Acquisition System},   
   groups       = {{ARTS-L}ab},  
