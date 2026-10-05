@@ -45,14 +45,15 @@ plt.close('all')
 
 #%% things you have to change
 # !!!!YOU HAVE TO CHANGE THESE EVERY NEW TEST!!!!
-TEST_FOLDER = "labview_daq/07302026/post/20Hz-9201-CMF-0-brick-post" # folder you're using
-TEST_FILE = "test1.lvm" # your data file from labview
+TEST_FOLDER = "labview_daq/07292026/instron/20Hz-9201-CMF-1-0.8kNtri" # folder you're using
+TEST_FILE = "20Hz-9201-CMF-1-0.8kNtri.lvm" # your data file from labview
 
 freq = 20 # arduino freq in Hz
 Rshunt = 1e6 # your plug's resistor (Rshunt) in ohms
 
-USE_FILTER = True # true is on, false is off
+USE_FILTER = False # true is on, false is off
 FILTER_TYPE = "lowpass" # lowpass or moving_average
+plt.rcParams.update({"figure.figsize": (6, 4)}) # what size you want the figures
 
 #%% save settings
 FILENAME = Path(TEST_FOLDER) / TEST_FILE # path to save to
@@ -296,7 +297,7 @@ if len(pulse_plot_data) > 0:
         y_min = np.min(Rmat)
         y_max = np.max(Rmat)
 
-    fig, ax = plt.subplots(figsize=(11, 4))
+    fig, ax = plt.subplots()
 
     ax.plot(window_time, window_rmat, label="Rmat", linewidth=1)
 
@@ -525,7 +526,7 @@ plt.savefig(
 '''
 # Vmat vs T: whole experiment
 window_vmat = Vmat[window_mask]
-plt.figure()
+plt.figure(size)
 plt.plot(time_full, Vmat)
 plt.xlim(plot_start, plot_end)
 plt.ylim(ymin - ypad, ymax + ypad)
