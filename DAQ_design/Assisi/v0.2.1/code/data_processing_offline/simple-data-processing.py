@@ -45,11 +45,11 @@ plt.close('all')
 
 #%% things you have to change
 # !!!!YOU HAVE TO CHANGE THESE EVERY NEW TEST!!!!
-TEST_FOLDER = "labview_daq/07292026/post/20Hz-9201-CMF-1-post" # folder you're using
-TEST_FILE = "20Hz-9201-CMF-1-post.lvm" # your data file from labview
+TEST_FOLDER = "labview_daq/07302026/post/20Hz-9201-CMF-1-quarry-post" # folder you're using
+TEST_FILE = "test1.lvm" # your data file from labview
 
 freq = 20 # arduino freq in Hz
-Rshunt = 1e6 # your plug's resistor (Rshunt) in ohms
+Rshunt = 550 # your plug's resistor (Rshunt) in ohms
 
 USE_FILTER = False # true is on, false is off
 FILTER_TYPE = "lowpass" # lowpass or moving_average
@@ -60,7 +60,7 @@ FILENAME = Path(TEST_FOLDER) / TEST_FILE # path to save to
 
 TEST_NAME = FILENAME.stem # name figures after your data file
 
-SAVE_FOLDER = Path(TEST_FOLDER) / "figures" # put figures here (you have to make this folder yourself)
+SAVE_FOLDER = Path(TEST_FOLDER) / "figures" # put figures here
 SAVE_FOLDER.mkdir(parents=True, exist_ok=True)
 
 #%% data prep
