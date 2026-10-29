@@ -51,7 +51,7 @@ TEST_FILE = "33k-5Hz.lvm" # your data file from labview
 freq = 5 # arduino freq in Hz
 Rshunt = 33000 # your plug's resistor (Rshunt) in ohms
 
-USE_FILTER = True # true is on, false is off
+USE_FILTER = False # true is on, false is off
 FILTER_TYPE = "lowpass" # lowpass or moving_average
 plt.rcParams.update({"figure.figsize": (6, 4)}) # what size you want the figures
 
@@ -559,5 +559,16 @@ plt.savefig(SAVE_FOLDER / f"{TEST_NAME}-fft.png",
             dpi=300,
             bbox_inches="tight")
 '''
+
+#quick check
+plt.figure()
+plt.plot(time_full, v1)
+plt.xlim(20, 21)
+plt.figure()
+plt.plot(time_full, v2)
+plt.xlim(20, 21)
+plt.figure()
+plt.plot(time_full, v3)
+plt.xlim(20, 21)
 
 print('All plots generated and saved.')
