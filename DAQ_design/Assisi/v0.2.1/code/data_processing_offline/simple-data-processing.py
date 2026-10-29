@@ -60,7 +60,7 @@ FILENAME = Path(TEST_FOLDER) / TEST_FILE # path to save to
 
 TEST_NAME = FILENAME.stem # name figures after your data file
 
-SAVE_FOLDER = Path(TEST_FOLDER) / "figures-lowpass" # put figures here
+SAVE_FOLDER = Path(TEST_FOLDER) / "figures" # put figures here
 SAVE_FOLDER.mkdir(parents=True, exist_ok=True)
 
 #%% data prep
